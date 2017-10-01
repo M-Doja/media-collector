@@ -18,12 +18,6 @@ const express = require('express'),
 
 const app = express();
 
-// mongoose.connect(process.env.MONGO_URI,(err, db) => {
-//   if (err) return console.log(err);
-//   db = db;
-//   console.log(`Connected to DB`);
-// });
-
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.prodDB_URI, {
   useMongoClient: true
@@ -34,7 +28,6 @@ mongoose.connect(keys.prodDB_URI, {
   console.log('Now connected to DB');
   db = db;
 });
-// mongoose.connect('mongodb://localhost:27017/Auth-Demo');
 
 
 // view engine setup

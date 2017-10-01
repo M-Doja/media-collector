@@ -7,11 +7,11 @@
         <p><%= currentUser.username.toUpperCase()  %>'s Movie Collection Total (<%= movie.length %>)</p>
     <%  } %>
     <form action="/home" method="GET" class="form-inline text-center" id="campground-search">
-      <div class="group">
-        <input type="text" id="schFld"name="search" placeholder="Collection search..." class="form-control">
-        <input class="btn btn-prim btn-sm" id="srcBtn"  type="submit" value="Search" >
+      <div class="group" style="max-width:500px;margin:0 auto;">
+        <input style="width:100%"type="text" id="schFld"name="search" placeholder="Collection search..." class="form-control">
+        <input class="btn btn-default btn-block" id="srcBtn"  type="submit" value="Search" >
       </div>
-      <div class="form-group">
+      <div class="form-group"><br>
         <a href="/home"class="btn-text">reset form</a>
       </div>
     </form><br>
