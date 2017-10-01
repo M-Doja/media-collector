@@ -25,7 +25,7 @@ const app = express();
 // });
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.testDB_URI, {
+mongoose.connect(keys.prodDB_URI, {
   useMongoClient: true
 }, (err, db) => {
   if (err) {
