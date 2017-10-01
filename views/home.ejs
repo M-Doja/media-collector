@@ -1,0 +1,89 @@
+
+  <% include partials/header %>
+    <div class="topSpace"></div>
+    <div class="topSpace"></div>
+    <h1></h1>
+    <%  if (currentUser){ %>
+        <p><%= currentUser.username.toUpperCase()  %>'s Movie Collection Total (<%= movie.length %>)</p>
+    <%  } %>
+    <hr>
+
+    <div class="row text-center">
+  		<div class="col-md-12">
+        <h2 class="text-center">Movie Collection</h2>
+        <br><br>
+
+            <% for(var i = 0; i < movie.length; i++){ %>
+              <div class="card text-center">
+                <h3><%= movie[i].title %></h3>
+                <!-- <span><%= movie[i].rating %> out of 10 <i class="glyphicon glyphicon-star"></i> stars</span><br> -->
+                <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie[i].poster %>" width=340 /><br>
+
+      					<span><b>Released:</b> <%= movie[i].year %> | <b>runtime:</b> <%= movie[i].runtime %> | <b>Rated:</b> <%= movie[i].rated %></span><br>
+
+      					<span></span>
+
+      					<span></span>
+
+      					<span><b>Directed by:</b> <%= movie[i].director %></span><br>
+
+      					<span><b>Starring:</b> <%= movie[i].actors %></span><br>
+
+      					<!-- <span><b>Plot:</b> <%= movie[i].plot %>...</span><br>
+
+      					<span><b>Overall Rating:</b> <%= movie[i].rating %></span><br>
+
+      					<span><b>Produced by:</b> <%= movie[i].production %></span><br><br> -->
+
+      					<span><a href="<%= movie[i].imdburl %>" target="_blank">View on IMDB website</a></span>
+
+      					<span><%= movie[i].imdbid %></span>
+                <br>
+
+             <div class="forms-wrap">
+               <br>
+               <form id="deleteBtnForm" class="">
+                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#EDIT<%= movie[i].id %>"><span class="glyphicon glyphicon-trash"></span> Trash</button>
+               </form>
+
+               <!-- <form id="editBtnForm" action="/edit/<%= movie[i].id %>" method="get">
+                 <button data-toggle="collapse" data-target="#demo" class="btn btn-danger"><span class="glyphicon glyphicon-edit"></span> Edit </button>
+               </form> -->
+
+               <form id="viewBtnForm"class="" action="/movie/<%= movie[i].id %>" method="get">
+                 <button type="submit" class="btn btn-danger"name="button">Read More</button>
+               </form>
+             </div>
+
+            </div>
+
+
+
+        <hr>
+
+        <!-- Confirnm Delete Modal -->
+        <div id="EDIT<%= movie[i].id %>" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+                <h4 class="modal-title">Are you sure you want to permanently delete <%= movie[i].title %>? </h4><br>
+                <form id="deleteBtnFormPerm" class="" action="/delete/<%= movie[i].id %>?_method=DELETE" method="post">
+                  <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Yes Remove <%= movie[i].title %></button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+       <% } %>
+
+  		</div>
+  	</div>
+
+
+<% include partials/footer %>

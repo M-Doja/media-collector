@@ -1,0 +1,88 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+hr {
+border-bottom:1px solid #000;
+
+}
+
+.form-group input,
+.form-group textarea {
+  /*display: none;*/
+  max-width: 500px;
+}
+
+/* EL SPACER */
+.topSpace {
+  margin-top:3em;
+}
+
+/* Login / Register Form */
+#logForm, #regForm {
+  border: 2px solid #000;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 500px;
+  text-align: center;
+  margin: auto;
+}
+.card {
+  border: black 3px solid;
+  box-shadow: 3px 3px 3px grey;
+  padding: 10px 20px 30px;
+  min-width: 310px;
+  max-width: 900px;
+  border-radius: 8px;
+  margin: 25px auto;
+}
+.card img {
+  margin: 20px auto;
+}
+/* HOME PAGE EDIT / DELETE BTNS */
+.forms-wrap #deleteBtnForm,
+.forms-wrap #viewBtnForm,
+.forms-wrap #editBtnForm {
+  display: inline-block;
+}
+
+/* HOME PAGE STAR RATING STYLE */
+.glyphicon-star {
+  font-size: 20px;
+  color: #e67e22;
+  margin-left: 5px;
+}
+
+/* EDIT PAGE INPUT / TEXTAREA  */
+#editForm input,
+#editForm textarea {
+  max-width: 700px;
+  margin: 15px auto;
+
+}
+#editForm textarea {
+  width: 500px;
+  height: 150px;
+  max-width: 700px;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 1.8rem;
+}
+/* -----  Mobile View  ------- */
+@media screen and (max-width: 520px) {
+
+    body { /* JUST FOR TESTING */
+        /*background-color: lightgreen;*/
+    }
+    #editForm textarea {
+      width: 300px;
+      height: 150px;
+      max-width: 700px;
+
+    }
+}

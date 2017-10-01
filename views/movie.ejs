@@ -1,0 +1,63 @@
+<% include partials/header %>
+
+
+  <form id="editForm" class="text-center" action="/update/<%= movie._id %>?_method=PUT" method="post">
+    <div class="">
+      <h1><%= movie.title %></h1>
+    </div>
+
+    <div class="">
+      <label>Rating: <%= movie.rating.substring(0, 1) %> out of 10 <i class="glyphicon glyphicon-star"></i> stars</label><br>
+    </div>
+
+
+    <div class="">
+      <img alt="Bootstrap Image Preview" src="<%= movie.poster %>" width=280 /><br><br>
+    </div>
+
+    <div class="">
+      <label>Released: </label>
+      <span><%= movie.year %></span><br>
+    </div>
+
+    <div class="group">
+      <label>Rated: </label>
+      <span><%= movie.rated %></span><br>
+    </div>
+
+    <div class="group">
+      <label>Runtime: </label>
+      <span><%= movie.runtime %></span><br>
+    </div>
+
+    <div class="">
+      <label>Director: </label>
+      <span><%= movie.director %></span><br>
+    </div>
+
+    <div class="">
+      <label>Actors: </label>
+      <span><%= movie.actors %></span><br><br>
+    </div>
+
+    <div class="">
+      <span><%= movie.plot %></span><br>
+    </div>
+
+    <div class="">
+      <label> Overall Rating: </label>
+      <span><%= movie.rating.substring(0, 3) %></span><br>
+    </div>
+
+    <div class="">
+      <label>Production: </label>
+      <span><%= movie.production %></span><br>
+    </div>
+    <br>
+    <br><br>
+    <a href="/home">back to collection</a>
+  </form>
+
+
+
+<% include partials/footer %>
