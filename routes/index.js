@@ -87,7 +87,7 @@ router.post('/register', function(req, res, next) {
   }), req.body.password, (err, user) => {
     if (err) {
       console.log(err);
-      return res.render('register');
+      return res.render('error', {message: err.message, error: err});
     }
     passport.authenticate('local')(req, res, () => {
       var movie = {};
@@ -137,6 +137,7 @@ router.post('/addCollection', (req, res) => {
   User.findOne({_id: req.user.id}, (err, user) => {
     if (err) {
       console.log(err);
+      return res.render('error', {message: err.message, error: err});
     }else {
       user.media.push(req.body);
       user.save();
