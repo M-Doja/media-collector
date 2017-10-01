@@ -11,7 +11,7 @@ const express = require('express'),
       methodOverride   = require('method-override'),
       cookieParser = require('cookie-parser'),
       bodyParser = require('body-parser'),
-      Config = require('./config.json'),
+      keys = require('./config/keys'),
       User = require('./models/User'),
       index = require('./routes/index'),
       users = require('./routes/users');
@@ -25,12 +25,14 @@ const app = express();
 // });
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(keys.prodDB_URI, {
   useMongoClient: true
-},(err, db) => {
-  if (err) return console.log(err);
+}, (err, db) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log('Now connected to DB');
   db = db;
-  console.log(`Connected to DB`);
 });
 // mongoose.connect('mongodb://localhost:27017/Auth-Demo');
 
