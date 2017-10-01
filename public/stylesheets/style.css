@@ -51,6 +51,10 @@ border-bottom:1px solid #000;
   display: inline-block;
 }
 
+#schFld {
+  /*text-transform: uppercase;*/
+}
+
 /* HOME PAGE STAR RATING STYLE */
 .glyphicon-star {
   font-size: 20px;

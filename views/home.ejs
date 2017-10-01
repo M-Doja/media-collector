@@ -6,6 +6,16 @@
     <%  if (currentUser){ %>
         <p><%= currentUser.username.toUpperCase()  %>'s Movie Collection Total (<%= movie.length %>)</p>
     <%  } %>
+    <form action="/home" method="GET" class="form-inline text-center" id="campground-search">
+      <div class="group">
+        <input type="text" id="schFld"name="search" placeholder="Collection search..." class="form-control">
+        <input class="btn btn-prim btn-sm" id="srcBtn"  type="submit" value="Search" >
+      </div>
+      <div class="form-group">
+        <a href="/home"class="btn-text">reset form</a>
+      </div>
+    </form><br>
+    <p class="text-center"><b><%= err %></b></p>
     <hr>
 
     <div class="row text-center">
@@ -16,7 +26,6 @@
             <% for(var i = 0; i < movie.length; i++){ %>
               <div class="card text-center">
                 <h3><%= movie[i].title %></h3>
-                <!-- <span><%= movie[i].rating %> out of 10 <i class="glyphicon glyphicon-star"></i> stars</span><br> -->
                 <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie[i].poster %>" width=340 /><br>
 
       					<span><b>Released:</b> <%= movie[i].year %> | <b>runtime:</b> <%= movie[i].runtime %> | <b>Rated:</b> <%= movie[i].rated %></span><br>
@@ -84,6 +93,10 @@
 
   		</div>
   	</div>
+    <script type="text/javascript">
+    const val = document.getElementById('schFld').value;
+    val.toUpperCase();
 
+    </script>
 
 <% include partials/footer %>

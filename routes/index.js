@@ -29,24 +29,52 @@ router.get('/addCollection', (req, res, next) => {
   res.render('/addCollection');
 });
 
+
 /* GET home page. */
 router.get('/home', isLoggedIn, (req, res, next) => {
-  User.find({}, (err, user) => {
-    const search = 'The Transporter';
-    imdb.get(search ,{apiKey: 'thewdb'})
-    .then( movie => {
-      console.log(movie);
-      if (req.user.media.length < 1) {
-
-        res.render('home',  {movie: movie, movies: "Welcome to the viewing room"});
-      }else {
-        res.render('home',  {movie: req.user.media, movies: "Welcome to the viewing room"});
-      }
-      console.log('Movie saved to collection');
-    })
-    .catch(console.log);
-  });
+  if(req.query.search) {
+    const regex = req.query.search.toUpperCase();
+    // Get mathched search from DB
+    User.find({'_id': req.user.id}, function(err, user){
+       if(err){
+          console.log(err);
+       } else {
+          for (var i = 0; i < user.length; i++) {
+            if (user[i].id === req.user.id) {
+              const mediaArr = user[i].media;
+              for (var i = 0; i < mediaArr.length; i++) {
+                if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
+                  const arr = [];
+                  arr.push(mediaArr[i]);
+                  return res.render('home',{movie: arr, err: ''});
+                }
+              }
+              res.render('home',{movie: mediaArr, err: 'Sorry no movie by that title found.'} )
+            }
+          }
+        }
+    });
+  }else {
+    User.find({}, (err, user) => {
+      const search = 'The Transporter';
+      imdb.get(search ,{apiKey: 'thewdb'})
+      .then( movie => {
+        if (req.user.media.length < 1) {
+          res.render('home',  {movie: movie, err: ''});
+        }else {
+          res.render('home',  {movie: req.user.media, err: ''});
+        }
+        console.log('Movie saved to collection');
+      })
+      .catch(console.log);
+    });
+  }
 });
+
+
+
+
+
 
 /* GET search page. */
 router.get('/search', isLoggedIn, (req, res, next) => {
@@ -58,7 +86,6 @@ router.get('/search', isLoggedIn, (req, res, next) => {
 router.get('/edit/:id', isLoggedIn, (req, res, next) => {
   User.findOne({'_id': req.user.id}, (err, user) => {
     for (var i = 0; i < user.media.length; i++) {
-      console.log(user.media[i].id);
       if (user.media[i].id === req.params.id) {
         res.render('edit', {movie: user.media[i]});
       }
@@ -113,9 +140,7 @@ router.get('/newsearch', (req, res) => {
   var search = req.query.search;
   imdb.get(search ,{apiKey: 'thewdb'})
   .then( movie => {
-    console.log(movie);
     res.render('addCollection', {movie:movie});
-    console.log('Movie saved to collection');
   })
   .catch(console.log);
 });
@@ -125,9 +150,7 @@ router.get('/results', (req, res) => {
   var search = req.query.search;
   imdb.get(search ,{apiKey: 'thewdb'})
   .then( movie => {
-    console.log(movie);
     res.render('search',  {movie: movie});
-    console.log('Movie saved to collection');
   })
   .catch(console.log);
 });
@@ -141,7 +164,7 @@ router.post('/addCollection', (req, res) => {
     }else {
       user.media.push(req.body);
       user.save();
-      res.render('home', {movie: user.media})
+      res.render('home', {movie: user.media, err: ''})
     }
   })
 });
@@ -150,7 +173,6 @@ router.post('/addCollection', (req, res) => {
 router.post('/delete/:id', (req, res) => {
   User.findOne({'_id': req.user.id}, (err, user) => {
     for (var i = 0; i < user.media.length; i++) {
-      console.log(user.media[i].id);
       if (user.media[i].id === req.params.id) {
         user.media.remove(req.params.id);
         user.save();
@@ -168,10 +190,8 @@ router.post('/delete/:id', (req, res) => {
 router.post('/update/:id', (req, res, next) => {
   User.findOne({'_id': req.user.id}, (err, user) => {
     for (var i = 0; i < user.media.length; i++) {
-      console.log(user.media[i].id);
       if (user.media[i].id === req.params.id) {
           user.media[i].genre = req.body.genre;
-          console.log(user);
           user.save();
         res.render('movie', {movie: user.media[i]})
       }
@@ -183,7 +203,6 @@ router.post('/update/:id', (req, res, next) => {
 router.get('/movie/:id', (req, res, next) => {
   User.findOne({'_id': req.user.id}, (err, user) => {
     for (var i = 0; i < user.media.length; i++) {
-      console.log(user.media[i].id);
       if (user.media[i].id === req.params.id) {
         res.render('movie', {movie: user.media[i]})
       }
