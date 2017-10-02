@@ -25,10 +25,9 @@ router.get('/register', (req, res, next) => {
 });
 
 /* GET main page. */
-router.get('/addCollection', (req, res, next) => {
+router.get('/addCollection', isLoggedIn, (req, res, next) => {
   res.render('/addCollection');
 });
-
 
 /* GET home page. */
 router.get('/home', isLoggedIn, (req, res, next) => {
@@ -71,15 +70,10 @@ router.get('/home', isLoggedIn, (req, res, next) => {
   }
 });
 
-
-
-
-
-
 /* GET search page. */
 router.get('/search', isLoggedIn, (req, res, next) => {
   const movie = {}
-  res.render('search' ,{movie: movie});
+  res.render('search' ,{movie: movie, err:''});
 });
 
 /* GET search page. */
@@ -99,6 +93,7 @@ router.get('/edit/:id', isLoggedIn, (req, res, next) => {
           USER ROUTES
 ============================================
 */
+
 /* Log In */
 router.post('/login', passport.authenticate('local', {
   successRedirect: 'home',
@@ -118,7 +113,7 @@ router.post('/register', function(req, res, next) {
     }
     passport.authenticate('local')(req, res, () => {
       var movie = {};
-      res.render('search', {movie: movie});
+      res.render('search', {movie: movie, err: ''});
     });
   });
 });
@@ -150,7 +145,7 @@ router.get('/results', (req, res) => {
   var search = req.query.search;
   imdb.get(search ,{apiKey: 'thewdb'})
   .then( movie => {
-    res.render('search',  {movie: movie});
+    res.render('search',  {movie: movie, err: ''});
   })
   .catch(console.log);
 });
@@ -162,9 +157,19 @@ router.post('/addCollection', (req, res) => {
       console.log(err);
       return res.render('error', {message: err.message, error: err});
     }else {
+      const userMedia = user.media;
+      console.log(userMedia);
+      if (userMedia.length > 0) {
+        for (var i = 0; i < userMedia.length; i++) {
+          if (userMedia[i].imdburl === req.body.imdburl) {
+            console.log('Match found');
+            return res.render('search', {movie: user.media, err: 'You already have that movie in your collection.'})
+          }
+        }
+      }
       user.media.push(req.body);
       user.save();
-      res.render('home', {movie: user.media, err: ''})
+      res.render('home', {movie: user.media, err: ''});
     }
   })
 });
@@ -177,40 +182,38 @@ router.post('/delete/:id', (req, res) => {
         user.media.remove(req.params.id);
         user.save();
         if ( user.media.length < 1) {
-          res.redirect('/search')
+          res.redirect('/search');
         }else {
-          res.redirect('/home')
+          res.redirect('/home');
         }
       }
     }
-  })
+  });
 });
 
-/* Edit Movie  */
-router.post('/update/:id', (req, res, next) => {
-  User.findOne({'_id': req.user.id}, (err, user) => {
-    for (var i = 0; i < user.media.length; i++) {
-      if (user.media[i].id === req.params.id) {
-          user.media[i].genre = req.body.genre;
-          user.save();
-        res.render('movie', {movie: user.media[i]})
-      }
-    }
-  })
-});
+/* Edit Movie In Collection */
+// router.post('/update/:id', (req, res, next) => {
+//   User.findOne({'_id': req.user.id}, (err, user) => {
+//     for (var i = 0; i < user.media.length; i++) {
+//       if (user.media[i].id === req.params.id) {
+//           user.media[i].genre = req.body.genre;
+//           user.save();
+//         res.render('movie', {movie: user.media[i]})
+//       }
+//     }
+//   })
+// });
 
-/* View Movie  */
+/* View Single Movie In Collection */
 router.get('/movie/:id', (req, res, next) => {
   User.findOne({'_id': req.user.id}, (err, user) => {
     for (var i = 0; i < user.media.length; i++) {
       if (user.media[i].id === req.params.id) {
-        res.render('movie', {movie: user.media[i]})
+        res.render('movie', {movie: user.media[i]});
       }
     }
-  })
+  });
 });
-
-
 
 
 /* MIDDLEWARE */
@@ -220,11 +223,5 @@ function isLoggedIn(req, res, next) {
   }
   res.redirect('/login');
 }
-
-
-
-
-
-
 
 module.exports = router;

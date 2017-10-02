@@ -8,97 +8,89 @@
         </div>
       <br><br>  <hr>
       </form>
-
+      <h3 class="text-center"><%= err %></h3><br><br>
       <div class="row text-center">
-        		<div class="col-md-12">
-              <a href="/home" class="btn btn-default">Back Home</a> <br><br>
+    		<div class="col-md-12">
+          <a href="/home" class="btn btn-default">Back Home</a> <br><br>
 
 
-                <form id="addForm" action="/addCollection" method="post">
-                  <%if (movie) {%>
-                    <button id="addCollectBtn"class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button>
+            <form id="addForm" action="/addCollection" method="post">
+              <%if (movie) {%>
+                <button id="addCollectBtn"class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button>
 
+                <div class="form-group">
+        					<h3><%= movie.title %></h3>
+        					<input type="text" class="form-control" name="title" value="<%= movie.title %>"/>
+        				</div>
 
+        				<div class="form-group">
+                  <span><%= movie.rating %> out of 10</span><br>
+        					<input type="text" class="form-control" name="rating" value="<%= movie.rating %>" />
+        				</div>
+                <!-- Image -->
+                <div class="form-group">
+                  <img alt="Bootstrap Image Preview" src="<%= movie.poster %>" width=140 /><br>
+        					<input type="text" class="form-control" name="poster" value="<%= movie.poster %>"/>
+        				</div>
 
+                <div class="form-group">
+        					<span><%= movie.year %></span>
+        					<input type="text" class="form-control" name="year" value="<%= movie.year %>"/>
+        				</div>
 
-                  <div class="form-group">
-          					<h3><%= movie.title %></h3>
-          					<input type="text" class="form-control" name="title" value="<%= movie.title %>"/>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.rated %></span>
+        					<input type="text" class="form-control" name="rated" value="<%= movie.rated %>"/>
+        				</div>
 
-          				<div class="form-group">
-                    <span><%= movie.rating %> out of 10</span><br>
-          					<input type="text" class="form-control" name="rating" value="<%= movie.rating %>" />
-          				</div>
-                  <!-- Image -->
-                  <div class="form-group">
-                    <img alt="Bootstrap Image Preview" src="<%= movie.poster %>" width=140 /><br>
-          					<input type="text" class="form-control" name="poster" value="<%= movie.poster %>"/>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.runtime %></span>
+        					<input type="text" class="form-control" name="runtime" value="<%= movie.runtime %>"/>
+        				</div>
 
-                  <div class="form-group">
-          					<span><%= movie.year %></span>
-          					<input type="text" class="form-control" name="year" value="<%= movie.year %>"/>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.genres %></span>
+        					<input type="text" class="form-control" name="genres" value="<%= movie.genres %>"/>
+        				</div>
 
-                  <div class="form-group">
-          					<span><%= movie.rated %></span>
-          					<input type="text" class="form-control" name="rated" value="<%= movie.rated %>"/>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.director %></span>
+        					<input type="text" class="form-control" name="director" value="<%= movie.director %>"/>
+        				</div>
 
-                  <div class="form-group">
-          					<span><%= movie.runtime %></span>
-          					<input type="text" class="form-control" name="runtime" value="<%= movie.runtime %>"/>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.actors %></span>
+        					<input type="text" class="form-control" name="actors" value="<%= movie.actors %>"/>
+        				</div>
 
-                  <div class="form-group">
-          					<span><%= movie.genres %></span>
-          					<input type="text" class="form-control" name="genres" value="<%= movie.genres %>"/>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.plot %></span>
+                  <textarea name="plot" rows="8" cols="80"><%= movie.plot %></textarea>
+        				</div>
 
-                  <div class="form-group">
-          					<span><%= movie.director %></span>
-          					<input type="text" class="form-control" name="director" value="<%= movie.director %>"/>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.rating %></span>
+        					<input type="text" class="form-control" name="rating" value="<%= movie.rating %>"/>
+        				</div>
 
-                  <div class="form-group">
-          					<span><%= movie.actors %></span>
-          					<input type="text" class="form-control" name="actors" value="<%= movie.actors %>"/>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.production %></span>
+        					<input type="text" class="form-control" name="production" value="<%= movie.production %>"/>
+        				</div>
 
-                  <div class="form-group">
-          					<span><%= movie.plot %></span>
-                    <textarea name="plot" rows="8" cols="80"><%= movie.plot %></textarea>
-          				</div>
+                <div class="form-group">
+        					<span><%= movie.imdburl %></span>
+        					<input type="text" class="form-control" name="imdburl" value="<%= movie.imdburl %>"/>
+        				</div>
 
-                  <div class="form-group">
-          					<span><%= movie.rating %></span>
-          					<input type="text" class="form-control" name="rating" value="<%= movie.rating %>"/>
-          				</div>
-
-                  <div class="form-group">
-          					<span><%= movie.production %></span>
-          					<input type="text" class="form-control" name="production" value="<%= movie.production %>"/>
-          				</div>
-
-                  <div class="form-group">
-          					<span><%= movie.imdburl %></span>
-          					<input type="text" class="form-control" name="imdburl" value="<%= movie.imdburl %>"/>
-          				</div>
-
-                  <div class="form-group">
-          					<span><%= movie.imdbid %></span>
-          					<input type="text" class="form-control" name="imdbid" value="<%= movie.imdbid %>"/>
-          				</div>
-                 <br>
-               </form>
-                   <%}%>
-
-
-
-
-        		</div>
-
-        	</div>
+                <div class="form-group">
+        					<span><%= movie.imdbid %></span>
+        					<input type="text" class="form-control" name="imdbid" value="<%= movie.imdbid %>"/>
+        				</div>
+               <br>
+             <%}%>
+           </form>
+    		</div>
+    	</div>
     </div>
 <% include partials/footer %>
