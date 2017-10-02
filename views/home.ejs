@@ -3,9 +3,11 @@
     <div class="topSpace"></div>
     <div class="topSpace"></div>
     <h1></h1>
-    <%  if (currentUser){ %>
+    <%  if (currentUser.username){ %>
         <p><%= currentUser.username.toUpperCase()  %>'s Movie Collection Total (<%= movie.length %>)</p>
-    <%  } %>
+    <%  } else { %>
+      <p> Movie Collection Total (<%= movie.length %>)</p>
+    <% } %>
     <form action="/home" method="GET" class="form-inline text-center" id="campground-search">
       <div class="group" style="max-width:500px;margin:0 auto;">
         <input style="width:100%"type="text" id="schFld"name="search" placeholder="Collection search..." class="form-control">

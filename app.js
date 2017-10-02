@@ -18,6 +18,8 @@ const express = require('express'),
 
 const app = express();
 
+require('./services/passport');
+
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.prodDB_URI, {
   useMongoClient: true
@@ -60,6 +62,7 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
+require('./routes/authRoutes')(app);
 
 app.use('/', index);
 app.use('/users', users);

@@ -134,7 +134,7 @@ router.get('/logout', (req, res) => {
 router.get('/newsearch', (req, res) => {
   var search = req.query.search;
   imdb.get(search ,{apiKey: 'thewdb'})
-  .then( movie => {
+  .then(movie => {
     res.render('addCollection', {movie:movie});
   })
   .catch(console.log);
@@ -147,7 +147,7 @@ router.get('/results', (req, res) => {
   .then( movie => {
     res.render('search',  {movie: movie, err: ''});
   })
-  .catch(console.log);
+  .catch();
 });
 
 /* Add Movie To Collection */
