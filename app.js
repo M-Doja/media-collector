@@ -31,7 +31,6 @@ mongoose.connect(keys.prodDB_URI, {
   db = db;
 });
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
