@@ -23,7 +23,7 @@
         <h2 class="text-center">Movie Collection</h2>
         <br><br>
 
-            <% for(var i = 0; i < movie.length; i++){ %>
+            <% for(var i = movie.length; i-- > 0;){ %>
               <div class="card text-center">
                 <h3><%= movie[i].title %></h3>
                 <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie[i].poster %>" width=340 /><br>
