@@ -21,16 +21,21 @@ const app = express();
 require('./services/passport');
 
 mongoose.Promise = global.Promise;
-// mongoose.connect(keys.testDB_URI,
-mongoose.connect(keys.prodDB_URI, {
-  useMongoClient: true
-}, (err, db) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log('Now connected to DB');
-  db = db;
-});
+if (process.env.NODE_ENV === 'production') {
+  mongoose.connect(keys.prodDB_URI, {
+    useMongoClient: true
+  }, (err, db) => {
+    if (err) {console.log(err);}
+    db = db;
+  });
+}else {
+  mongoose.connect(keys.testDB_URI, (err, db) => {
+    if (err) {console.log(err);}
+    console.log('Now connected to DB');
+    db = db;
+  });
+}
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
