@@ -74,9 +74,10 @@ border-bottom:1px solid #000;
   background: #fff;
 }
 
-.card img {
+.img-responsive {
   margin: 20px auto;
 }
+
 .border {
   border-top: 2px solid #000;
 }
