@@ -52,10 +52,12 @@ border-bottom:1px solid #000;
   border-radius: 8px;
   max-width: 500px;
   text-align: center;
-  margin: auto;
+  margin: 100px auto;
 }
 
-
+.modal {
+  margin: 80px auto;
+}
 .card {
   max-height: 775px;
   box-shadow: 3px 3px 3px grey;
