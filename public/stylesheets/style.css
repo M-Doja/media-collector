@@ -7,7 +7,7 @@ body {
 a {
   color: #00B7FF;
 }
-h1, .h2 {
+h1, .h2, .brand {
   font-family: 'Varela Round', sans-serif;
 }
 
@@ -16,7 +16,12 @@ h1, .h2 {
 }
 hr {
 border-bottom:1px solid #000;
-
+}
+.blue {
+  color: #00B7FF;
+}
+.red {
+  color: red;
 }
 
 #index {
@@ -82,6 +87,10 @@ border-bottom:1px solid #000;
   display: inline-block;
 }
 
+#addForm {
+  padding-left: 8%;
+  padding-right: 8%;
+}
 
 /* HOME PAGE STAR RATING STYLE */
 .glyphicon-star {

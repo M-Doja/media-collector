@@ -3,12 +3,7 @@
   <div id="home">
     <div class="topSpace"></div>
     <div class="topSpace"></div>
-    <h1></h1>
-    <%  if (currentUser.username){ %>
-        <p><%= currentUser.username.toUpperCase()  %>'s Movie Collection Total (<%= movie.length %>)</p>
-    <%  } else { %>
-      <p> Movie Collection Total (<%= movie.length %>)</p>
-    <% } %>
+
     <form action="/home" method="GET" class="form-inline text-center" id="campground-search">
       <div class="group" style="max-width:500px;margin:0 auto;">
         <input style="width:100%"type="text" id="schFld"name="search" placeholder="Collection search..." class="form-control">
@@ -24,6 +19,11 @@
     <div class="row text-center">
   		<div class="col-md-12">
         <h2 class="h2 text-center">Movie Collection</h2>
+        <%  if (currentUser.username && movie.length > 0){ %>
+            <p><b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red"><%= movie.length %></span>)</b></p>
+        <%  }else { %>
+            <p><b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red">0</span>)</b></p>
+        <%} %>
         <br><br>
           <div class="row">
 
