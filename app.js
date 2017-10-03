@@ -36,7 +36,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -67,6 +66,7 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
+
 require('./routes/authRoutes')(app);
 
 app.use('/', index);

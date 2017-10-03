@@ -1,12 +1,19 @@
 body {
   padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #e8e9e9;
 }
 
 a {
   color: #00B7FF;
 }
+h1, .h2 {
+  font-family: 'Varela Round', sans-serif;
+}
 
+.h2 {
+  font-size: 38px;
+}
 hr {
 border-bottom:1px solid #000;
 
@@ -45,15 +52,23 @@ border-bottom:1px solid #000;
 
 
 .card {
-  border: black 3px solid;
+  max-height: 775px;
   box-shadow: 3px 3px 3px grey;
+}
+.board{
+  box-shadow: 8px 8px 15px grey;
+}
+
+.board, .card {
+  border: black 3px solid;
   padding: 10px 20px 30px;
   min-width: 310px;
-  max-width: 900px;
-  max-height: 775px;
+  max-width: 800px;
   border-radius: 8px;
   margin: 25px auto;
+  background: #fff;
 }
+
 .card img {
   margin: 20px auto;
 }
