@@ -30,13 +30,13 @@
 
             <% for(var i = movie.length; i-- > 0;){ %>
               <% if( movie.length > 3){ %>
-              <div class="border col-lg-3 col-md-6">
+              <div class="border text-center col-lg-3 col-md-6">
               <% }else if( movie.length > 2){ %>
-              <div class="border col-lg-4 col-md-6">
-              <% }else if( movie.length <= 2){ %>
-              <div class="border col-md-6">
+              <div class="border text-center col-lg-4 col-md-6">
+              <% }else if( movie.length < 2){ %>
+              <div class="border text-center col-md-12">
               <% }else { %>
-                <div class="border col-md-6">
+                <div class="border text-center col-md-6">
               <% } %>
                 <div class="card text-center">
                   <h1><%= movie[i].title %></h1>
