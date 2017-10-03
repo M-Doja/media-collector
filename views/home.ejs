@@ -1,5 +1,6 @@
 
   <% include partials/header %>
+  <div id="home">
     <div class="topSpace"></div>
     <div class="topSpace"></div>
     <h1></h1>
@@ -24,53 +25,50 @@
   		<div class="col-md-12">
         <h2 class="text-center">Movie Collection</h2>
         <br><br>
+          <div class="row">
+
 
             <% for(var i = movie.length; i-- > 0;){ %>
-              <div class="card text-center">
-                <h3><%= movie[i].title %></h3>
-                <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie[i].poster %>" width=340 /><br>
+              <% if( movie.length > 3){ %>
+              <div class="border col-lg-3 col-md-6">
+              <% }else if( movie.length > 2){ %>
+              <div class="border col-lg-4 col-md-6">
+              <% }else if( movie.length <= 2){ %>
+              <div class="border col-md-6">
+              <% }else { %>
+                <div class="border col-md-6">
+              <% } %>
+                <div class="card text-center">
+                  <h1><%= movie[i].title %></h1>
+                  <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie[i].poster %>" width=320 /><br>
 
-      					<span><b>Released:</b> <%= movie[i].year %> | <b>runtime:</b> <%= movie[i].runtime %> | <b>Rated:</b> <%= movie[i].rated %></span><br>
+        					<p>
+                    <span><b>Released:</b> <%= movie[i].year %> | <b>runtime:</b> <%= movie[i].runtime %> | <b>Rated:</b> <%= movie[i].rated %></span>
+                  </p>
 
-      					<span><b>Genre:</b> <%= movie[i].genres %></span><br>
+        					<p>
+                    <span><b>Genre:</b> <%= movie[i].genres %></span>
+                  </p>
 
-      					<span></span>
+        					<span><a href="<%= movie[i].imdburl %>" target="_blank">View on IMDB website</a></span>
 
-      					<span><b>Directed by:</b> <%= movie[i].director %></span><br>
+                 <div class="forms-wrap">
+                   <br>
+                   <form id="deleteBtnForm" class="">
+                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#EDIT<%= movie[i].id %>"><span class="glyphicon glyphicon-trash"></span> Trash</button>
+                   </form>
 
-      					<span><b>Starring:</b> <%= movie[i].actors %></span><br><br>
+                   <!-- <form id="editBtnForm" action="/edit/<%= movie[i].id %>" method="get">
+                     <button data-toggle="collapse" data-target="#demo" class="btn btn-danger"><span class="glyphicon glyphicon-edit"></span> Edit </button>
+                   </form> -->
 
-      					<!-- <span><b>Plot:</b> <%= movie[i].plot %>...</span><br>
+                   <form id="viewBtnForm"class="" action="/movie/<%= movie[i].id %>" method="get">
+                     <button type="submit" class="btn btn-danger"name="button">Read More</button>
+                   </form>
+                 </div>
 
-      					<span><b>Overall Rating:</b> <%= movie[i].rating %></span><br>
-
-      					<span><b>Produced by:</b> <%= movie[i].production %></span><br><br> -->
-
-      					<span><a href="<%= movie[i].imdburl %>" target="_blank">View on IMDB website</a></span>
-
-      					<span><%= movie[i].imdbid %></span>
-                <br>
-
-             <div class="forms-wrap">
-               <br>
-               <form id="deleteBtnForm" class="">
-                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#EDIT<%= movie[i].id %>"><span class="glyphicon glyphicon-trash"></span> Trash</button>
-               </form>
-
-               <!-- <form id="editBtnForm" action="/edit/<%= movie[i].id %>" method="get">
-                 <button data-toggle="collapse" data-target="#demo" class="btn btn-danger"><span class="glyphicon glyphicon-edit"></span> Edit </button>
-               </form> -->
-
-               <form id="viewBtnForm"class="" action="/movie/<%= movie[i].id %>" method="get">
-                 <button type="submit" class="btn btn-danger"name="button">Read More</button>
-               </form>
-             </div>
-
-            </div>
-
-
-
-        <hr>
+                </div>
+              </div>
 
         <!-- Confirnm Delete Modal -->
         <div id="EDIT<%= movie[i].id %>" class="modal fade" role="dialog">
@@ -94,10 +92,13 @@
        <% } %>
 
   		</div>
+        </div>
   	</div>
+  </div>
+
     <script type="text/javascript">
-    const val = document.getElementById('schFld').value;
-    val.toUpperCase();
+    // const val = document.getElementById('schFld').value;
+    // val.toUpperCase();
 
     </script>
 

@@ -14,6 +14,11 @@ router.get('/', (req, res, next) => {
   res.redirect('/login');
 });
 
+/* GET main page. */
+router.get('/grid', (req, res, next) => {
+  res.render('grid');
+});
+
 /* GET login page. */
 router.get('/login', (req, res, next) => {
   res.render('index');

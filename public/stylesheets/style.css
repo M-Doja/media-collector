@@ -12,6 +12,16 @@ border-bottom:1px solid #000;
 
 }
 
+#index {
+  /*background-image: url('/images/mediaback2.jpg');*/
+  background-size: cover;
+  height: 800px;
+}
+
+#home {
+  /*background-image: url('/images/mediaback1.jpg');*/
+}
+
 .form-group input,
 .form-group textarea {
   /*display: none;*/
@@ -32,17 +42,23 @@ border-bottom:1px solid #000;
   text-align: center;
   margin: auto;
 }
+
+
 .card {
   border: black 3px solid;
   box-shadow: 3px 3px 3px grey;
   padding: 10px 20px 30px;
   min-width: 310px;
   max-width: 900px;
+  max-height: 775px;
   border-radius: 8px;
   margin: 25px auto;
 }
 .card img {
   margin: 20px auto;
+}
+.border {
+  border-top: 2px solid #000;
 }
 /* HOME PAGE EDIT / DELETE BTNS */
 .forms-wrap #deleteBtnForm,
@@ -51,9 +67,6 @@ border-bottom:1px solid #000;
   display: inline-block;
 }
 
-#schFld {
-  /*text-transform: uppercase;*/
-}
 
 /* HOME PAGE STAR RATING STYLE */
 .glyphicon-star {
