@@ -3,6 +3,21 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #e8e9e9;
 }
+#landing {
+  width: 100%;
+  height: 1000px;
+  /*height: 100%;*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  background-image: url('/images/collection.jpg');
+  background-size: auto;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  z-index: -99;
+}
 
 a {
   color: #00B7FF;
@@ -25,9 +40,7 @@ border-bottom:1px solid #000;
 }
 
 #index {
-  /*background-image: url('/images/mediaback2.jpg');*/
-  background-size: cover;
-  height: 800px;
+  margin: 200px auto;
 }
 
 #home {
@@ -48,11 +61,17 @@ border-bottom:1px solid #000;
 /* Login / Register Form */
 #logForm, #regForm {
   border: 2px solid #000;
+  background-color: #ddd;
+  opacity: .88;
   padding: 25px;
   border-radius: 8px;
   max-width: 500px;
   text-align: center;
   margin: 100px auto;
+  z-index: 999;
+  color:#000;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .modal {
