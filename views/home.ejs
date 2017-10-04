@@ -25,19 +25,13 @@
             <p><b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red">0</span>)</b></p>
         <%} %>
         <br><br>
-          <div class="row">
+          <ul class="flex-container wrap" id="cardContainer">
 
-
+            <!-- <ul class="flex-container wrap">
+              1
+            </ul> -->
             <% for(var i = movie.length; i-- > 0;){ %>
-              <% if( movie.length > 3){ %>
-              <div class="border text-center col-lg-3 col-md-6">
-              <% }else if( movie.length > 2){ %>
-              <div class="border text-center col-lg-4 col-md-6">
-              <% }else if( movie.length < 2){ %>
-              <div class="border text-center col-md-12">
-              <% }else { %>
-                <div class="border text-center col-md-6">
-              <% } %>
+              <li class="flex-item">
                 <div class="card text-center">
                   <h1><%= movie[i].title %></h1>
                   <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie[i].poster %>" width=320 /><br>
@@ -66,30 +60,33 @@
                      <button type="submit" class="btn btn-danger"name="button">Read More</button>
                    </form>
                  </div>
+                 <!-- Confirnm Delete Modal -->
+                 <div id="EDIT<%= movie[i].id %>" class="modal fade" role="dialog">
+                   <div class="modal-dialog">
 
-                </div>
-              </div>
+                     <!-- Modal content-->
+                     <div class="modal-content">
+                       <div class="modal-body">
+                         <h4 class="modal-title">Are you sure you want to permanently delete <%= movie[i].title %>? </h4><br>
+                         <form id="deleteBtnFormPerm" class="" action="/delete/<%= movie[i].id %>?_method=DELETE" method="post">
+                           <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Yes Remove <%= movie[i].title %></button>
+                         </form>
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                       </div>
+                     </div>
 
-        <!-- Confirnm Delete Modal -->
-        <div id="EDIT<%= movie[i].id %>" class="modal fade" role="dialog">
-          <div class="modal-dialog">
+                   </div>
+                 </div>
 
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-body">
-                <h4 class="modal-title">Are you sure you want to permanently delete <%= movie[i].title %>? </h4><br>
-                <form id="deleteBtnFormPerm" class="" action="/delete/<%= movie[i].id %>?_method=DELETE" method="post">
-                  <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Yes Remove <%= movie[i].title %></button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
+               </div> <!-- End Card -->
+               </li>
+             <% } %>
+           </ul>
 
-          </div>
-        </div>
-       <% } %>
+
+
 
   		</div>
         </div>

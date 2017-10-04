@@ -40,7 +40,27 @@ border-bottom:1px solid #000;
 }
 
 #index {
-  margin: 200px auto;
+  margin: 150px auto;
+}
+
+.flex-container {
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+.wrap    {
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.flex-item {
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+  list-style: none;
 }
 
 #home {
@@ -67,7 +87,7 @@ border-bottom:1px solid #000;
   border-radius: 8px;
   max-width: 500px;
   text-align: center;
-  margin: 40px auto;
+  margin: 40px auto 20px;
   z-index: 999;
   color:#000;
   font-weight: bold;
