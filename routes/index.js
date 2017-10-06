@@ -37,7 +37,7 @@ router.get('/addCollection', isLoggedIn, (req, res, next) => {
 /* GET home page. */
 router.get('/home', isLoggedIn, (req, res, next) => {
   if(req.query.search) {
-    const regex = req.query.search.toUpperCase();
+    const regex = req.query.search;
     // Get mathched search from DB
     User.find({'_id': req.user.id}, function(err, user){
        if(err){
@@ -49,8 +49,9 @@ router.get('/home', isLoggedIn, (req, res, next) => {
               for (var i = 0; i < mediaArr.length; i++) {
                 if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
                   const arr = [];
+                   const vidGallery = mediaArr[i].imdburl+"/videogallery?ref_=tt_pv_vi_sm";
                   arr.push(mediaArr[i]);
-                  return res.render('home',{movie: arr, err: ''});
+                  return res.render('home',{movie: arr, err: '', video: vidGallery});
                 }
               }
               res.render('home',{movie: mediaArr, err: 'Sorry no movie by that title found.'} )
@@ -70,7 +71,7 @@ router.get('/home', isLoggedIn, (req, res, next) => {
         }
         console.log('Movie saved to collection');
       })
-      .catch(console.log);
+       .catch(console.log);
     });
   }
 });
@@ -149,10 +150,13 @@ router.get('/newsearch', (req, res) => {
 router.get('/results', (req, res) => {
   var search = req.query.search;
   imdb.get(search ,{apiKey: 'thewdb'})
-  .then( movie => {
+  .then( (movie) => {
     res.render('search',  {movie: movie, err: ''});
   })
-  .catch();
+  .catch(err => {
+    movie = {}
+    res.render('search',  {movie: movie, err: 'Sorry movie not found!'})
+  });
 });
 
 /* Add Movie To Collection */
@@ -163,7 +167,6 @@ router.post('/addCollection', (req, res) => {
       return res.render('error', {message: err.message, error: err});
     }else {
       const userMedia = user.media;
-      console.log(userMedia);
       if (userMedia.length > 0) {
         for (var i = 0; i < userMedia.length; i++) {
           if (userMedia[i].imdburl === req.body.imdburl) {
@@ -172,6 +175,7 @@ router.post('/addCollection', (req, res) => {
           }
         }
       }
+      req.body.genres = req.body.genres.split(',');
       user.media.push(req.body);
       user.save();
       res.render('home', {movie: user.media, err: ''});
@@ -228,5 +232,12 @@ function isLoggedIn(req, res, next) {
   }
   res.redirect('/login');
 }
+
+
+function stringToArr(str) {
+   str = str.split(',');
+  return str;
+}
+console.log(stringToArr('John, Micah, John'));
 
 module.exports = router;

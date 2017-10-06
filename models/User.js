@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     rated: String,
     year: String,
     runtime: String,
-    genres: String,
+    genres: [String],
     director: String,
     writer: [String],
     actors: [String],
