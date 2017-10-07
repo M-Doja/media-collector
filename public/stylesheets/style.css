@@ -124,6 +124,7 @@ ul{
 }
 .card {
   height: 800px;
+  max-width: 470px;
   box-shadow: 3px 3px 3px grey;
 }
 .board{
