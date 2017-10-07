@@ -197,7 +197,9 @@ router.post('/addCollection', (req, res) => {
       }
       req.body.genres = req.body.genres.split(',');
       req.body.actors = req.body.actors.split(',');
-
+      if (req.body.title === '') {
+        return res.render('search', {movie: user.media, err: 'Please search for a movie to add to your collection'})
+      }
       user.media.push(req.body);
       user.save();
       for (var i = 0; i < user.media.length; i++) {
