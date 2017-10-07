@@ -99,9 +99,10 @@ router.get('/edit/:id', isLoggedIn, (req, res, next) => {
 // Search DB by actor
 router.post('/search/actors', isLoggedIn, (req, res) => {
   const movieArr = [];
+  console.log(req.body.actor);
   req.user.media.forEach(movie => {
     movie.actors.forEach(actor => {
-      if (actor === req.body.actor) {
+      if (actor === req.body.actor || actor === ' '+req.body.actor ) {
         movieArr.push(movie);
 
       }
