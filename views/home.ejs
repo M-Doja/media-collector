@@ -4,9 +4,9 @@
     <div class="topSpace"></div>
     <div class="topSpace"></div>
 
-    <form action="/home" method="GET" class="form-inline text-center" id="campground-search">
+    <form action="/home" method="GET" class="form-inline text-center" id="movie-search">
       <div class="group" style="max-width:500px;margin:0 auto;">
-        <input style="width:100%"type="text" id="schFld"name="search" required placeholder="Collection search..." class="form-control">
+        <input style="width:100%"type="text" id="schFld" name="search" required placeholder="Collection search..." class="form-control">
         <input class="btn btn-default btn-block" id="srcBtn"  type="submit" value="Search" >
       </div>
       <div class="form-group"><br>
@@ -27,21 +27,27 @@
         <br><br>
           <ul class="flex-container wrap" id="cardContainer">
 
-            <!-- <ul class="flex-container wrap">
-              1
-            </ul> -->
             <% for(var i = movie.length; i-- > 0;){ %>
+
               <li class="flex-item">
                 <div class="card text-center">
                   <h1><b><%= movie[i].title %></b></h1>
-                  <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie[i].poster %>" width=320 /><br>
+                  <img alt="Bootstrap Image Preview" class="poster" src="<%= movie[i].poster %>" /><br>
 
         					<p>
                     <span><b>Released:</b> <%= movie[i].year %> | <b>runtime:</b> <%= movie[i].runtime %> | <b>Rated:</b> <%= movie[i].rated %></span>
                   </p>
 
+                  <p><b>Genre:</b> <%= movie[i].genres %></p>
+
         					<p>
-                    <span><b>Genre:</b> <%= movie[i].genres %></span>
+                    <span style="margin-bottom:-10px;display:block"><b>Starring:</b></span>
+                    <% for(var t = movie[i].actors.length; t-- > 0;){ %>
+                        <form  style="display:inline;" action="/search/actors"method="post">
+                          <input type="text" class="form-search" name="actor" value="<%= movie[i].actors[t] %>">
+                          <button style="padding:3px;"type="submit" class="actorBtn"><%= movie[i].actors[t] %></button>
+                        </form>
+                    <% } %>
                   </p>
 
         					<span><a href="<%= movie[i].imdburl %>" target="_blank">View on IMDB website</a></span>

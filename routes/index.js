@@ -38,7 +38,7 @@ router.get('/addCollection', isLoggedIn, (req, res, next) => {
 router.get('/home', isLoggedIn, (req, res, next) => {
   if(req.query.search) {
     const regex = req.query.search;
-    // Get mathched search from DB
+    // Search DB by movie title
     User.find({'_id': req.user.id}, function(err, user){
        if(err){
           console.log(err);
@@ -49,9 +49,8 @@ router.get('/home', isLoggedIn, (req, res, next) => {
               for (var i = 0; i < mediaArr.length; i++) {
                 if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
                   const arr = [];
-                   const vidGallery = mediaArr[i].imdburl+"/videogallery?ref_=tt_pv_vi_sm";
                   arr.push(mediaArr[i]);
-                  return res.render('home',{movie: arr, err: '', video: vidGallery});
+                  return res.render('home',{movie: arr, err: ''});
                 }
               }
               res.render('home',{movie: mediaArr, err: 'Sorry no movie by that title found.'} )
@@ -65,9 +64,13 @@ router.get('/home', isLoggedIn, (req, res, next) => {
       imdb.get(search ,{apiKey: 'thewdb'})
       .then( movie => {
         if (req.user.media.length < 1) {
-          res.render('home',  {movie: movie, err: ''});
+          const genreArr = [];
+          res.render('home',  {movie: movie, err: '', genres: genreArr});
         }else {
-          res.render('home',  {movie: req.user.media, err: ''});
+          for (var i = 0; i < req.user.media.length; i++) {
+            const genreArr = req.user.media[i].genres;
+            res.render('home',  {movie: req.user.media, err: '', genres: genreArr});
+          }
         }
         console.log('Movie saved to collection');
       })
@@ -93,6 +96,20 @@ router.get('/edit/:id', isLoggedIn, (req, res, next) => {
   })
 });
 
+// Search DB by actor
+router.post('/search/actors', isLoggedIn, (req, res) => {
+  const movieArr = [];
+  req.user.media.forEach(movie => {
+    movie.actors.forEach(actor => {
+      if (actor === req.body.actor) {
+        movieArr.push(movie);
+
+      }
+    })
+  })
+  res.render('home',{movie:movieArr, err: ''});
+
+})
 
 /*
 ============================================
@@ -173,12 +190,23 @@ router.post('/addCollection', (req, res) => {
             console.log('Match found');
             return res.render('search', {movie: user.media, err: 'You already have that movie in your collection.'})
           }
+          const mediaItem = userMedia[i]
+
         }
       }
       req.body.genres = req.body.genres.split(',');
+      req.body.actors = req.body.actors.split(',');
+
       user.media.push(req.body);
       user.save();
-      res.render('home', {movie: user.media, err: ''});
+      for (var i = 0; i < user.media.length; i++) {
+        for (var x = 0; x < user.media[i].genres.length; x++) {
+          console.log('User Genres:'+ user.media[i].genres[x]);
+          const genreArr = user.media[i].genres[x]
+          res.render('home', {movie: user.media, err: '', genres: genreArr});
+        }
+      }
+      // res.render('home', {movie: user.media, err: ''});
     }
   })
 });

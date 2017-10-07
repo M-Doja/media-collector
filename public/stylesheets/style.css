@@ -70,11 +70,32 @@ ul{
 #home {
   /*background-image: url('/images/mediaback1.jpg');*/
 }
+.poster {
+  max-height: 475px;
+  max-width: 320px;
+  height: 100%;
+  width: 100%;
+  margin: 3% auto;
+}
 
 .form-group input,
 .form-group textarea {
-  /*display: none;*/
   max-width: 500px;
+}
+
+.form-search {
+  display: none;
+}
+.actorBtn {
+  background: none;
+  border: none;
+  outline: none;
+  transition: all .3s linear;
+}
+.actorBtn:hover {
+  border-bottom: 1px solid #000;
+  background-color: lightblue;
+  border-radius: 8px;
 }
 
 /* EL SPACER */
@@ -102,7 +123,7 @@ ul{
   margin: 80px auto;
 }
 .card {
-  height: 750px;
+  height: 800px;
   box-shadow: 3px 3px 3px grey;
 }
 .board{
