@@ -93,8 +93,14 @@ router.get('/edit/:id', isLoggedIn, (req, res, next) => {
         res.render('edit', {movie: user.media[i]});
       }
     }
-  })
+  });
 });
+
+/*
+============================================
+          FILTER SEARCH ROUTES
+============================================
+*/
 
 // Search DB by actor
 router.post('/search/actors', isLoggedIn, (req, res) => {
@@ -106,11 +112,25 @@ router.post('/search/actors', isLoggedIn, (req, res) => {
         movieArr.push(movie);
 
       }
-    })
-  })
+    });
+  });
   res.render('home',{movie:movieArr, err: ''});
+});
 
-})
+// Search DB by genre
+router.post('/search/genres', isLoggedIn, (req, res) => {
+  const movieArr = [];
+  console.log(req.body.genre);
+  req.user.media.forEach(movie => {
+    movie.genres.forEach(genre => {
+      if (genre === req.body.genre || genre === ' '+req.body.genre ) {
+        movieArr.push(movie);
+
+      }
+    });
+  });
+  res.render('home',{movie:movieArr, err: ''});
+});
 
 /*
 ============================================

@@ -31,14 +31,23 @@
 
               <li class="flex-item">
                 <div class="card text-center">
-                  <h1><b><%= movie[i].title %></b></h1>
+                  <h1 class="h1top"><b><%= movie[i].title %></b></h1>
                   <img alt="Bootstrap Image Preview" class="poster" src="<%= movie[i].poster %>" /><br>
 
         					<p>
                     <span><b>Released:</b> <%= movie[i].year %> | <b>runtime:</b> <%= movie[i].runtime %> | <b>Rated:</b> <%= movie[i].rated %></span>
                   </p>
 
-                  <p><b>Genre:</b> <%= movie[i].genres %></p>
+                  <!-- <p><b>Genre:</b> <%= movie[i].genres %></p> -->
+                  <p>
+                    <span style="margin-bottom:-10px;display:block"><b>Starring:</b></span>
+                    <% for(var t = movie[i].genres.length; t-- > 0;){ %>
+                        <form  style="display:inline;" action="/search/genres"method="post">
+                          <input type="text" class="form-search" name="genre" value="<%= movie[i].genres[t] %>">
+                          <button style="padding:3px;"type="submit" class="genreBtn"><%= movie[i].genres[t] %></button>
+                        </form>
+                    <% } %>
+                  </p>
 
         					<p>
                     <span style="margin-bottom:-10px;display:block"><b>Starring:</b></span>

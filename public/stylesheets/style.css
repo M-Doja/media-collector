@@ -3,29 +3,12 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #e8e9e9;
 }
-#landing {
-  width: 100%;
-  height: 1000px;
-  /*height: 100%;*/
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #000;
-  background-image: url('/images/collection.jpg');
-  background-size: auto;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  opacity: 0.8;
-  z-index: -99;
-}
-
 a {
   color: #00B7FF;
 }
 h1, .h2, .brand {
   font-family: 'Varela Round', sans-serif;
 }
-
 .h2 {
   font-size: 38px;
 }
@@ -38,15 +21,17 @@ border-bottom:1px solid #000;
 .red {
   color: red;
 }
-
-ul{
+ul {
   padding: 0;
 }
-
 #index {
   margin: 100px auto;
 }
+#home {
+  /*background-image: url('/images/mediaback1.jpg');*/
+}
 
+/* UL styling */
 .flex-container {
   -ms-box-orient: horizontal;
   display: -webkit-box;
@@ -60,16 +45,18 @@ ul{
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+/* Each list item in unordered list / card wrapper */
 .flex-item {
   padding: 5px;
   margin: auto;
   text-align: center;
   list-style: none;
+  width: 100%;
+  max-width: 480px;
 }
 
-#home {
-  /*background-image: url('/images/mediaback1.jpg');*/
-}
+
+/* Home pg movie images*/
 .poster {
   max-height: 475px;
   max-width: 320px;
@@ -78,21 +65,23 @@ ul{
   margin: 3% auto;
 }
 
+/* Forms and Form Inputs */
 .form-group input,
 .form-group textarea {
   max-width: 500px;
 }
-
 .form-search {
   display: none;
 }
-.actorBtn {
+
+/* Genre and Actor filter search links */
+.actorBtn, .genreBtn {
   background: none;
   border: none;
   outline: none;
   transition: all .3s linear;
 }
-.actorBtn:hover {
+.actorBtn:hover, .genreBtn:hover {
   border-bottom: 1px solid #000;
   background-color: lightblue;
   border-radius: 8px;
@@ -119,35 +108,42 @@ ul{
   font-size: 20px;
 }
 
+/* Adjust removal modal */
 .modal {
   margin: 80px auto;
 }
 
+/* Container for movie data */
 div.card {
   height: 850px;
   box-shadow: 3px 3px 3px grey;
 }
-.board{
-  box-shadow: 8px 8px 15px grey;
-}
 
+/* Movie container styling*/
 .board, .card {
   border: black 3px solid;
   padding: 10px 20px 30px;
   min-width: 310px;
-  max-width: 800px;
   border-radius: 8px;
   margin: 25px auto;
   background: #fff;
 }
 
+/* Adjust H1 title in card */
+.h1top {
+  margin: 0;
+}
+
+/* Movie pg movie container sytling */
+.board {
+  box-shadow: 8px 8px 15px grey;
+}
+
+/* Adjust position of home pg movie images */
 .img-responsive {
   margin: 20px auto;
 }
 
-.border {
-  border-top: 2px solid #000;
-}
 /* HOME PAGE EDIT / DELETE BTNS */
 .forms-wrap #deleteBtnForm,
 .forms-wrap #viewBtnForm,
@@ -155,6 +151,7 @@ div.card {
   display: inline-block;
 }
 
+/* Search pg form adjustment */
 #addForm {
   padding-left: 8%;
   padding-right: 8%;
@@ -193,5 +190,8 @@ div.card {
       height: 150px;
       max-width: 700px;
 
+    }
+    div.card {
+      height: 900px;
     }
 }
