@@ -40,7 +40,7 @@
 
                   <!-- <p><b>Genre:</b> <%= movie[i].genres %></p> -->
                   <p>
-                    <span style="margin-bottom:-10px;display:block"><b>Starring:</b></span>
+                    <span style="margin-bottom:-10px;display:block"><b>Genres:</b></span>
                     <% for(var t = movie[i].genres.length; t-- > 0;){ %>
                         <form  style="display:inline;" action="/search/genres"method="post">
                           <input type="text" class="form-search" name="genre" value="<%= movie[i].genres[t] %>">
