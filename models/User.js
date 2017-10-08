@@ -5,6 +5,7 @@ const UserSchema = new mongoose.Schema({
   username: String,
   password: String,
   googleId: String,
+  watchList: [],
   media: [{
     title: String,
     image: String,

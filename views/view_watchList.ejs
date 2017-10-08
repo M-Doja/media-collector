@@ -1,0 +1,63 @@
+<% include partials/header %>
+    <div class="topSpace"></div>
+<% if(watchList.length > 0) { %>
+  <h1 class="text-center">WatchList (<%- watchList.length %>)</h1>
+<%}else { %>
+  <h1 class="text-center">WatchList (0)</h1>
+<%}%>
+<ul><hr>
+  <% watchList.forEach(movie => { %>
+    <li style="padding-left:20px;padding-right:20px">
+      <div class="row demo">
+        <div class="col-md-3 text-center">
+          <h2><%= movie.title %></h2>
+          <p><b>Released:</b> <%= movie.year %></p>
+          <p><b>Rated:</b> <%= movie.rated %></p>
+          <p><b>Genre:</b> <%= movie.genres %></p>
+          <p><b>Starring:</b> <%= movie.actors %></p>
+        </div>
+        <div class="col-md-3 text-center">
+          <img class="imgWatchList"src="<%= movie.poster %>" width="130" alt="">
+        </div>
+        <div class="col-md-3 whiteShade boldtext">
+          <p><%= movie.plot %></p>
+        </div>
+        <div class="col-md-3">
+          <form class="text-center" action="/watchlist/<%= movie.imdbid %>" method="get">
+            <input type="submit" class="btn btn-default boldtext"name="" value="More Info">
+          </form><br>
+
+          <form id="editForm" class="text-center" action="/addCollection" method="post">
+            <button id="addCollectBtn"class="btn boldtext btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button><br><br>
+            <div class="form-group">
+              <input type="text" class="form-control" name="title" value="<%= movie.title %>"/>
+              <input type="text" class="form-control" name="rating" value="<%= movie.rating %>" />
+              <input type="text" class="form-control" name="poster" value="<%= movie.poster %>"/>
+              <input type="text" class="form-control" name="year" value="<%= movie.year %>"/>
+              <input type="text" class="form-control" name="rated" value="<%= movie.rated %>"/>
+              <input type="text" class="form-control" name="runtime" value="<%= movie.runtime %>"/>
+              <input type="text" class="form-control" name="genres" value="<%= movie.genres %>"/>
+              <input type="text" class="form-control" name="director" value="<%= movie.director %>"/>
+              <input type="text" class="form-control" name="actors" value="<%= movie.actors %>"/>
+              <input type="text" class="form-control" name="plot" value="<%= movie.plot %>"/>
+              <input type="text" class="form-control" name="rating" value="<%= movie.rating %>"/>
+              <input type="text" class="form-control" name="production" value="<%= movie.production %>"/>
+              <input type="text" class="form-control" name="imdburl" value="<%= movie.imdburl %>"/>
+              <input type="text" class="form-control" name="imdbid" value="<%= movie.imdbid %>"/>
+            </div>
+          </form>
+
+          <form id="deleteBtnFormPerm" class="text-center" action="/remove/<%= movie.imdbid %>?_method=DELETE" method="post">
+            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>  Remove From Watchlist</button>
+          </form><br>
+        </div>
+      </div>
+    </li>
+    <hr>
+
+
+  <%})%>
+</ul>
+
+
+<% include partials/footer %>

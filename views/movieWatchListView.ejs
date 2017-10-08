@@ -1,0 +1,93 @@
+<% include partials/header %>
+
+  <div class="board">
+    <h4 class="text-center"><a href="/home">Collection/</a><a href="/view_watchList">Watchlist/</a><a href="/watchlist/<%= movie.imdbid %>"><%= movie.title %></a></h4>
+    <div class="topSpace"></div>
+
+    <form id="editForm" class="text-center" action="/addCollection" method="post">
+      <!-- <button id="addCollectBtn"class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button> -->
+      
+      <div class="">
+        <h1><%= movie.title %></h1>
+      </div>
+
+      <div class="">
+        <label>Rating: <%= movie.rating %> out of 10 <i class="glyphicon glyphicon-star"></i> stars</label><br>
+      </div>
+
+
+      <div class="">
+        <img alt="Bootstrap Image Preview" src="<%= movie.poster %>" class="img-responsive" /><br><br>
+      </div>
+
+      <div class="">
+        <label>Released: </label>
+        <span><%= movie.year %></span><br>
+      </div>
+
+      <div class="group">
+        <label>Rated: </label>
+        <span><%= movie.rated %></span><br>
+      </div>
+
+      <div class="">
+        <label>Genre: </label>
+        <span><%= movie.genres %></span><br>
+      </div>
+
+      <div class="group">
+        <label>Runtime: </label>
+        <span><%= movie.runtime %></span><br>
+      </div>
+
+      <div class="">
+        <label>Director: </label>
+        <span><%= movie.director %></span><br>
+      </div>
+
+      <div class="">
+        <label>Actors: </label>
+        <span><%= movie.actors %></span><br><br>
+      </div>
+
+      <div class="">
+        <span><p><%= movie.plot %></p></span>
+      </div>
+
+      <div class="">
+        <label> Overall Rating: </label>
+        <span><%= movie.rating %></span><br>
+      </div>
+
+      <div class="">
+        <label>Production: </label>
+        <span><%= movie.production %></span><br>
+      </div>
+      <br>
+
+      <br><br>
+
+      <!-- data sent from this form -->
+      <div class="form-group">
+        <input type="text" class="form-control" name="title" value="<%= movie.title %>"/>
+        <input type="text" class="form-control" name="rating" value="<%= movie.rating %>" />
+        <input type="text" class="form-control" name="poster" value="<%= movie.poster %>"/>
+        <input type="text" class="form-control" name="year" value="<%= movie.year %>"/>
+        <input type="text" class="form-control" name="rated" value="<%= movie.rated %>"/>
+        <input type="text" class="form-control" name="runtime" value="<%= movie.runtime %>"/>
+        <input type="text" class="form-control" name="genres" value="<%= movie.genres %>"/>
+        <input type="text" class="form-control" name="director" value="<%= movie.director %>"/>
+        <input type="text" class="form-control" name="actors" value="<%= movie.actors %>"/>
+        <input type="text" class="form-control" name="plot" value="<%= movie.plot %>"/>
+        <input type="text" class="form-control" name="rating" value="<%= movie.rating %>"/>
+        <input type="text" class="form-control" name="production" value="<%= movie.production %>"/>
+        <input type="text" class="form-control" name="imdburl" value="<%= movie.imdburl %>"/>
+        <input type="text" class="form-control" name="imdbid" value="<%= movie.imdbid %>"/>
+      </div>
+    </form>
+  </div>
+
+
+
+
+<% include partials/footer %>

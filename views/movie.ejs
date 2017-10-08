@@ -1,8 +1,9 @@
 <% include partials/header %>
 
   <div class="board">
+    <h4 class="text-center"><a href="/home">Collection/</a><a href="/movie/<%= movie.id %>"><%= movie.title %></a></h4>
     <form id="editForm" class="text-center" action="/update/<%= movie._id %>?_method=PUT" method="post">
-      <br><br>
+      <br>
       <div class="">
         <h1><%= movie.title %></h1>
       </div>
@@ -69,9 +70,11 @@
         </p><br>
       </div>
       <br><br>
-      <a href="/home">back to collection</a>
+      <!-- <a href="/home">back to collection</a> -->
     </form>
+
   </div>
+  <!-- <p class="text-center cid">CID #<%= movie._id %></p> -->
 
 
 

@@ -12,11 +12,30 @@
       <h3 class="text-center"><%= err %></h3><br><br>
       <div class="row text-center">
     		<div class="col-md-12">
-          <a href="/home" class="btn btn-default">Back Home</a> <br><br>
 
+            <%if (movie) {%>
+              <form class="" action="/add_watchlist" method="post">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="title" value="<%= movie.title %>"/>
+                    <input type="text" class="form-control" name="rating" value="<%= movie.rating %>" />
+                    <input type="text" class="form-control" name="poster" value="<%= movie.poster %>"/>
+                    <input type="text" class="form-control" name="year" value="<%= movie.year %>"/>
+                    <input type="text" class="form-control" name="rated" value="<%= movie.rated %>"/>
+                    <input type="text" class="form-control" name="runtime" value="<%= movie.runtime %>"/>
+                    <input type="text" class="form-control" name="genres" value="<%= movie.genres %>"/>
+                    <input type="text" class="form-control" name="director" value="<%= movie.director %>"/>
+                    <input type="text" class="form-control" name="actors" value="<%= movie.actors %>"/>
+                    <input type="text" class="form-control" name="plot" value="<%= movie.plot %>"/>
+                    <input type="text" class="form-control" name="rating" value="<%= movie.rating %>"/>
+                    <input type="text" class="form-control" name="production" value="<%= movie.production %>"/>
+                    <input type="text" class="form-control" name="imdburl" value="<%= movie.imdburl %>"/>
+                    <input type="text" class="form-control" name="imdbid" value="<%= movie.imdbid %>"/>
+                  </div>
+                  <input type="submit" id="addWatchListBtn"class="btn btn-default" value="Add to watch list">
+              </form>
+              <br>
 
-            <form id="addForm" action="/addCollection" method="post">
-              <%if (movie) {%>
+              <form id="addForm" action="/addCollection" method="post">
                 <button id="addCollectBtn"class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button>
 
                 <div class="form-group">
@@ -89,8 +108,8 @@
         					<input type="text" class="form-control" name="imdbid" value="<%= movie.imdbid %>"/>
         				</div>
                <br>
-             <%}%>
-           </form>
+             </form>
+           <%}%>
     		</div>
     	</div>
     </div>

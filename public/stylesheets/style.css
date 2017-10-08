@@ -1,7 +1,24 @@
 body {
-  padding: 30px;
+  /*padding: 30px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /*background: #e8e9e9;*/
+  /*background: #05e;*/
+  background: #00a0ee
+
+}
+.movSrch{
+  max-width:500px;
+  padding:20px 10px;
+  margin: auto;
+}
+
+#home{
   background: #e8e9e9;
+  border-radius: 8px;
+  margin-bottom: 50px;
+}
+.wrap {
+  padding: 20px;
 }
 a {
   color: #00B7FF;
@@ -23,6 +40,9 @@ border-bottom:1px solid #000;
 }
 ul {
   padding: 0;
+}
+li {
+  list-style: none;
 }
 #index {
   margin: 100px auto;
@@ -74,6 +94,43 @@ ul {
   display: none;
 }
 
+.btn-nfo{
+  background-color: lightblue;
+  color:black;
+  font-weight: bold;
+}
+
+.boldtext{
+  font-weight: bold;
+}
+
+.imgWatchList{
+  border: 3px solid #fff;
+  margin: 0 auto 20px auto;
+}
+
+.whiteShade {
+  margin: 10px auto 20px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.demo {
+  margin: 0 auto;
+  padding-top: 64px;
+  height: 100%;
+}
+
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
 /* Genre and Actor filter search links */
 .actorBtn, .genreBtn {
   background: none;
@@ -119,6 +176,10 @@ div.card {
   box-shadow: 3px 3px 3px grey;
 }
 
+.board {
+  max-width: 850px
+}
+
 /* Movie container styling*/
 .board, .card {
   border: black 3px solid;
@@ -136,7 +197,7 @@ div.card {
 
 /* Movie pg movie container sytling */
 .board {
-  box-shadow: 8px 8px 15px grey;
+  box-shadow: 8px 8px 15px #333;
 }
 
 /* Adjust position of home pg movie images */

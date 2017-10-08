@@ -198,7 +198,7 @@ router.get('/results', (req, res) => {
 });
 
 /* Add Movie To Collection */
-router.post('/addCollection', (req, res) => {
+router.post('/addCollection', isLoggedIn, (req, res) => {
   User.findOne({_id: req.user.id}, (err, user) => {
     if (err) {
       console.log(err);
@@ -206,15 +206,32 @@ router.post('/addCollection', (req, res) => {
     }else {
       const userMedia = user.media;
       if (userMedia.length > 0) {
+        /* CHECK FOR DUPLICATES */
         for (var i = 0; i < userMedia.length; i++) {
           if (userMedia[i].imdburl === req.body.imdburl) {
             console.log('Match found');
             return res.render('search', {movie: user.media, err: 'You already have that movie in your collection.'})
           }
-          const mediaItem = userMedia[i]
 
+         user.watchList.forEach(movie => {
+           console.log(movie);
+          //  if (movie.imdburl === userMedia[i].imdburl) {
+          //    user.watchList.remove(movie);
+          //    user.save();
+          //  }
+         })
         }
       }
+
+      // for (var i = 0; i < user.watchList.length; i++) {
+      //   if (user.watchList[i] === mediaItem) {
+      //     console.log('You need to remove '+user.watchList[i]+' from the '+user.watchList.length+ 'others.');
+      //     // const wlMovie = user.watchList[i]
+      //     // user.watchList.splice(wlMovie,1);
+      //     // user.save();
+      //   }
+      // }
+
       req.body.genres = req.body.genres.split(',');
       req.body.actors = req.body.actors.split(',');
       if (req.body.title === '') {
@@ -229,13 +246,60 @@ router.post('/addCollection', (req, res) => {
           res.render('home', {movie: user.media, err: '', genres: genreArr});
         }
       }
-      // res.render('home', {movie: user.media, err: ''});
     }
   })
 });
 
+/* Add Movie To WatchList */
+router.post('/add_watchlist', isLoggedIn, (req, res) => {
+  User.findOne({'_id': req.user.id}, (err, user) => {
+    if (err) {
+      return console.log(err);
+    }else {
+      // req.body.rating = req.body.rating.substring(0, 1);
+      req.body.genres = req.body.genres.split(',');
+      req.body.actors = req.body.actors.split(',');
+      if (req.body.title === '') {
+        return res.render('search', {movie: user.media, err: 'Please search for a movie to add to your watch list'})
+      }
+      user.watchList.push(req.body);
+      autoDelete();
+      user.save();
+      res.render('home', {movie: user.media, err: req.body.title+' has been added to your watch list'})
+    }
+  });
+});
+
+/* View Watchlist */
+router.get('/view_watchList', isLoggedIn, (req, res) => {
+  User.findOne({'_id': req.user.id}, (err, user) => {
+    res.render('view_watchList', {watchList: user.watchList, });
+  })
+});
+
+/* View Single Movie In Watchlist */
+router.get('/watchlist/:id', isLoggedIn, (req, res) => {
+  User.findOne({'_id': req.user.id}, (err, user) => {
+    for (var i = 0; i < user.watchList.length; i++) {
+      if (user.watchList[i].imdbid === req.params.id) {
+        res.render('movieWatchListView', {movie: user.watchList[i]});
+      }
+    }
+  });
+});
+
+/* Add Single Movie In Watchlist To Collection */
+router.get('/watchlist/add', isLoggedIn, (req, res, next) => {
+  res.send(req.body)
+  // User.findOne({'_id': req.user.id}, (err, user) => {
+  //
+  // });
+});
+
+
+
 /* Remove Movie From Collection */
-router.post('/delete/:id', (req, res) => {
+router.post('/delete/:id', isLoggedIn, (req, res) => {
   User.findOne({'_id': req.user.id}, (err, user) => {
     for (var i = 0; i < user.media.length; i++) {
       if (user.media[i].id === req.params.id) {
@@ -250,6 +314,23 @@ router.post('/delete/:id', (req, res) => {
     }
   });
 });
+
+/* Remove Movie From Watchlist */
+function autoDelete() {
+  router.post('/remove/:id', isLoggedIn, (req, res) => {
+    console.log(req.params.id);
+    User.findOne({'_id': req.user.id}, (err, user) => {
+      for (var i = 0; i < req.user.watchList.length; i++) {
+        if (req.user.watchList[i].imdbid === req.params.id) {
+          req.user.watchList.remove(req.user.watchList[i]);
+          req.user.save();
+          res.redirect('/view_watchList');
+
+        }
+      }
+    });
+  });
+}
 
 /* Edit Movie In Collection */
 // router.post('/update/:id', (req, res, next) => {
@@ -274,6 +355,8 @@ router.get('/movie/:id', (req, res, next) => {
     }
   });
 });
+
+
 
 
 /* MIDDLEWARE */
