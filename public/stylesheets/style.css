@@ -1,5 +1,5 @@
 body {
-  /*padding: 30px;*/
+  padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   /*background: #e8e9e9;*/
   /*background: #05e;*/
@@ -18,7 +18,7 @@ body {
   margin-bottom: 50px;
 }
 .wrap {
-  padding: 20px;
+  /*padding: 20px;*/
 }
 a {
   color: #00B7FF;
