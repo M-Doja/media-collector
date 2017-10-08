@@ -34,6 +34,13 @@ router.get('/addCollection', isLoggedIn, (req, res, next) => {
   res.render('/addCollection');
 });
 
+/* GET now showing page. */
+router.get('/now_showing', isLoggedIn, (req, res, next) => {
+  const randomMovie = random_movie(req.user.media);
+  res.render('nowShowing', {movie: randomMovie});
+
+});
+
 /* GET home page. */
 router.get('/home', isLoggedIn, (req, res, next) => {
   if(req.query.search) {
@@ -367,6 +374,9 @@ function isLoggedIn(req, res, next) {
   res.redirect('/login');
 }
 
+function random_movie(movies){
+  return movies[Math.floor(Math.random()* movies.length)];
+}
 
 function stringToArr(str) {
    str = str.split(',');
