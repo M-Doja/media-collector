@@ -120,6 +120,7 @@ li {
 .btn-danger:active:focus,
 .btn-danger:active:hover  {
   background: blue;
+  border-color: darkblue;
   /*background: #4267b2;*/
 }
 
@@ -171,11 +172,55 @@ li {
 .topSpace {
   margin-top:3em;
 }
-
-/* Login / Register Form */
-#logForm, #regForm {
+.clapwrap{
+  /*border:2px solid #000;*/
+  padding: 10px;
+  margin: auto;
+}
+.clapwrap li {
+  display: inline;
+  max
+}
+.clapwrap ul {
+  margin: auto auto -38px;
+  max-width: 500px;
+}
+.colorband:nth-child(odd) {
+  background: white;
+  width: 5em;
+  height: 80px;
+  display: inline-block;
+}
+.colorband:nth-child(even) {
+  width: 13%;
+  height: 13%;
+  display: inline-block;
+}
+#logForm{
   border: 2px solid #000;
-  background-color: #ddd;
+  background-color: #000;
+  opacity: .98;
+  padding: 5px;
+  border-radius: 8px;
+  max-width: 500px;
+  text-align: center;
+  margin: 40px auto 20px;
+  z-index: 999;
+  color:#000;
+  font-weight: bold;
+  font-size: 20px;
+}
+#logForm input {
+  background:none;
+  outline:none;
+  border-top:none;
+  border-right:none;
+  border-left:none;
+}
+/* Login / Register Form */
+ #regForm {
+  border: 2px solid #000;
+  background-color: #000;
   opacity: .88;
   padding: 25px;
   border-radius: 8px;
@@ -278,4 +323,5 @@ div.card {
     div.card {
       height: 900px;
     }
+
 }
