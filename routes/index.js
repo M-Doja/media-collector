@@ -26,7 +26,7 @@ router.get('/login', (req, res, next) => {
 
 /* GET register page. */
 router.get('/register', (req, res, next) => {
-  res.render('register');
+  res.render('register', {message: ''});
 });
 
 /* GET main page. */
@@ -166,7 +166,7 @@ router.post('/register', function(req, res, next) {
   }), req.body.password, (err, user) => {
     if (err) {
       console.log(err);
-      return res.render('error', {message: err.message, error: err});
+      return res.render('register', {message: err.message, error: err});
     }
     passport.authenticate('local')(req, res, () => {
       var movie = {};
@@ -251,7 +251,6 @@ router.post('/add_watchlist', isLoggedIn, (req, res) => {
     if (err) {
       return console.log(err);
     }else {
-      // req.body.rating = req.body.rating.substring(0, 1);
       req.body.genres = req.body.genres.split(',');
       req.body.actors = req.body.actors.split(',');
       if (req.body.title === '') {

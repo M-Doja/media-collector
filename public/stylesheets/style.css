@@ -172,18 +172,18 @@ li {
 .topSpace {
   margin-top:3em;
 }
-.clapwrap{
-  /*border:2px solid #000;*/
-  padding: 10px;
-  margin: auto;
+.clapwrap form,
+.clapwrap ul{
+  box-shadow:6px 6px 9px #333;
 }
+
 .clapwrap li {
   display: inline;
   width: 5.5rem;
   height: 80px;
 }
 .clapwrap ul {
-  margin: auto auto -38px;
+  margin: auto auto -28px;
   max-width: 500px;
 }
 .colorband:nth-child(odd) {
@@ -202,7 +202,7 @@ li {
   background-color: #000;
   opacity: .98;
   padding: 5px;
-  border-radius: 8px;
+  border-radius: 0 0 8px 8px;
   max-width: 500px;
   text-align: center;
   margin: 40px auto 20px;
