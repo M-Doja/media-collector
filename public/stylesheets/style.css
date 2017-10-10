@@ -179,7 +179,8 @@ li {
 }
 .clapwrap li {
   display: inline;
-  max
+  width: 5.5rem;
+  height: 80px;
 }
 .clapwrap ul {
   margin: auto auto -38px;
@@ -187,8 +188,7 @@ li {
 }
 .colorband:nth-child(odd) {
   background: white;
-  width: 5em;
-  height: 80px;
+
   display: inline-block;
 }
 .colorband:nth-child(even) {
@@ -196,6 +196,7 @@ li {
   height: 13%;
   display: inline-block;
 }
+
 #logForm{
   border: 2px solid #000;
   background-color: #000;
