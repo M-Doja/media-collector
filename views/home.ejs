@@ -31,7 +31,21 @@
 
             <% for(var i = movie.length; i-- > 0;){ %>
 
-              <li class="flex-item">
+              <p style="margin:30px auto; padding-left:4.5%; padding-right:4.5%;">
+                <a href="/movie/<%= movie[i].id %>">
+                  <button class="btn btn-danger text-center"  name="<%= movie[i].title %>">
+                    <h4><%= movie[i].title.substring(0, 15) %></h4><br>
+                    <img class="imgWatchList"src="<%= movie[i].poster %>" width="130" alt="<%= movie[i].title %> poster image">
+                    <!-- <p><b>Released:</b> <%= movie.year %></p>
+                    <p><b>Rated:</b> <%= movie.rated %></p>
+                    <p><b>Genre:</b> <%= movie.genres %></p>
+                    <p><b>Starring:</b> <%= movie.actors %></p> -->
+                  </button>
+                </a>
+
+              </p>
+
+              <li class="li flex-item">
                 <div class="card text-center">
                   <h1 class="h1top"><b><%= movie[i].title %></b></h1>
                   <img alt="Bootstrap Image Preview" class="poster img-responsive" src="<%= movie[i].poster %>" />

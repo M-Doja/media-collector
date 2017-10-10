@@ -1,8 +1,8 @@
 <% include partials/header %>
 
-  <div class="board">
+  <div class="board text-center">
     <h4 class="text-center"><a href="/home">Collection/</a><a href="/movie/<%= movie.id %>"><%= movie.title %></a></h4>
-    <form id="editForm" class="text-center" action="/update/<%= movie._id %>?_method=PUT" method="post">
+    <div id="editForm" class="text-center" >
       <br>
       <div class="">
         <h1><%= movie.title %></h1>
@@ -29,7 +29,12 @@
 
       <div class="">
         <label>Genre: </label>
-        <span><%= movie.genres %></span><br>
+          <% for(var t = movie.genres.length; t-- > 0;){ %>
+              <form  style="display:inline;" action="/search/genres"method="post">
+                <input type="text" class="form-search" name="genre" value="<%= movie.genres[t] %>">
+                <button style="padding:3px;"type="submit" class="genreBtn"><%= movie.genres[t] %></button>
+              </form>
+          <% } %>
       </div>
 
       <div class="group">
@@ -42,9 +47,15 @@
         <span><%= movie.director %></span><br>
       </div>
 
-      <div class="">
+      <div class="text-center">
         <label>Actors: </label>
-        <span><%= movie.actors %></span><br><br>
+        <% for(var t = movie.actors.length; t-- > 0;){ %>
+            <form  style="display:inline;" action="/search/actors"method="post">
+              <input type="text" class="form-search" name="actor" value="<%= movie.actors[t] %>">
+              <button style="padding:3px;"type="submit" class="actorBtn"><%= movie.actors[t] %></button>
+            </form>
+        <% } %>
+        <br><br>
       </div>
 
       <div class="">
@@ -67,11 +78,35 @@
           <a href="<%= movie.imdburl %>/mediaindex?ref_=tt_sa_1" target="_blank">Photos</a> |
           <a href="<%= movie.imdburl %>/fullcredits?ref_=tt_ql_1" target="_blank">View Cast & Crew</a> |
           <a href="<%= movie.imdburl %>/trivia?ref_=tt_ql_2" target="_blank">trivia</a>
+          <br><br><br><br>
         </p><br>
+        <form id="deleteBtnForm" class="">
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#DELETE<%= movie.id %>"><span class="glyphicon glyphicon-trash"></span> Remove</button>
+        </form>
       </div>
       <br><br>
-      <!-- <a href="/home">back to collection</a> -->
-    </form>
+    </div>
+
+    <!-- Confirnm Delete Modal -->
+    <div id="DELETE<%= movie.id %>" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4 class="modal-title">Are you sure you want to permanently delete <%= movie.title %>? </h4><br>
+            <form id="deleteBtnFormPerm" class="text-center" action="/delete/<%= movie.id %>?_method=DELETE" method="post">
+              <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Yes Remove <%= movie.title %></button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
 
   </div>
   <!-- <p class="text-center cid">CID #<%= movie._id %></p> -->

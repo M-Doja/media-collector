@@ -34,11 +34,21 @@ router.get('/addCollection', isLoggedIn, (req, res, next) => {
   res.render('/addCollection');
 });
 
+/* GET search page. */
+router.get('/search', isLoggedIn, (req, res, next) => {
+  const movie = {}
+  res.render('search' ,{movie: movie, err:''});
+});
+
 /* GET now showing page. */
 router.get('/now_showing', isLoggedIn, (req, res, next) => {
   const randomMovie = random_movie(req.user.media);
-  res.render('nowShowing', {movie: randomMovie});
-
+  if (randomMovie) {
+    res.render('nowShowing', {movie: randomMovie});
+  }else {
+    const movie = {}
+    res.render('search' ,{movie: movie, err:''});
+  }
 });
 
 /* GET home page. */
@@ -86,22 +96,18 @@ router.get('/home', isLoggedIn, (req, res, next) => {
   }
 });
 
-/* GET search page. */
-router.get('/search', isLoggedIn, (req, res, next) => {
-  const movie = {}
-  res.render('search' ,{movie: movie, err:''});
-});
 
-/* GET search page. */
-router.get('/edit/:id', isLoggedIn, (req, res, next) => {
-  User.findOne({'_id': req.user.id}, (err, user) => {
-    for (var i = 0; i < user.media.length; i++) {
-      if (user.media[i].id === req.params.id) {
-        res.render('edit', {movie: user.media[i]});
-      }
-    }
-  });
-});
+
+/* GET edit page. */
+// router.get('/edit/:id', isLoggedIn, (req, res, next) => {
+//   User.findOne({'_id': req.user.id}, (err, user) => {
+//     for (var i = 0; i < user.media.length; i++) {
+//       if (user.media[i].id === req.params.id) {
+//         res.render('edit', {movie: user.media[i]});
+//       }
+//     }
+//   });
+// });
 
 /*
 ============================================
@@ -219,26 +225,8 @@ router.post('/addCollection', isLoggedIn, (req, res) => {
             console.log('Match found');
             return res.render('search', {movie: user.media, err: 'You already have that movie in your collection.'})
           }
-
-         user.watchList.forEach(movie => {
-           console.log(movie);
-          //  if (movie.imdburl === userMedia[i].imdburl) {
-          //    user.watchList.remove(movie);
-          //    user.save();
-          //  }
-         })
         }
       }
-
-      // for (var i = 0; i < user.watchList.length; i++) {
-      //   if (user.watchList[i] === mediaItem) {
-      //     console.log('You need to remove '+user.watchList[i]+' from the '+user.watchList.length+ 'others.');
-      //     // const wlMovie = user.watchList[i]
-      //     // user.watchList.splice(wlMovie,1);
-      //     // user.save();
-      //   }
-      // }
-
       req.body.genres = req.body.genres.split(',');
       req.body.actors = req.body.actors.split(',');
       if (req.body.title === '') {
@@ -270,7 +258,6 @@ router.post('/add_watchlist', isLoggedIn, (req, res) => {
         return res.render('search', {movie: user.media, err: 'Please search for a movie to add to your watch list'})
       }
       user.watchList.push(req.body);
-      autoDelete();
       user.save();
       res.render('home', {movie: user.media, err: req.body.title+' has been added to your watch list'})
     }
@@ -280,7 +267,7 @@ router.post('/add_watchlist', isLoggedIn, (req, res) => {
 /* View Watchlist */
 router.get('/view_watchList', isLoggedIn, (req, res) => {
   User.findOne({'_id': req.user.id}, (err, user) => {
-    res.render('view_watchList', {watchList: user.watchList, });
+    res.render('view_watchList', {watchList: user.watchList, err: '' });
   })
 });
 
@@ -296,11 +283,33 @@ router.get('/watchlist/:id', isLoggedIn, (req, res) => {
 });
 
 /* Add Single Movie In Watchlist To Collection */
-router.get('/watchlist/add', isLoggedIn, (req, res, next) => {
-  res.send(req.body)
-  // User.findOne({'_id': req.user.id}, (err, user) => {
-  //
-  // });
+router.post('/watchlist/add/:id', isLoggedIn, (req, res, next) => {
+  console.log(req.params.id);
+  User.findOne({'_id': req.user.id}, (err, user) => {
+
+    for (var i = 0; i < req.user.watchList.length; i++) {
+
+      if (req.user.watchList[i].imdbid === req.params.id) {
+        const newMovie = req.user.watchList[i];
+        const userMedia = req.user.media;
+
+        if (userMedia.length > 0) {
+          /* CHECK FOR DUPLICATES */
+          for (var i = 0; i < userMedia.length; i++) {
+            if (userMedia[i].imdburl === newMovie.imdburl) {
+              console.log('Match found');
+              return res.render('view_watchList', { watchList:req.user.watchList, err: 'You already have that movie in your collection.'})
+            }
+          }
+        }
+        req.user.media.push(newMovie);
+        req.user.watchList.remove(newMovie);
+        req.user.save();
+        res.render('view_watchList', { watchList:req.user.watchList, err: 'Movie added to your collection'});
+
+      }
+    }
+  });
 });
 
 
@@ -323,21 +332,22 @@ router.post('/delete/:id', isLoggedIn, (req, res) => {
 });
 
 /* Remove Movie From Watchlist */
-function autoDelete() {
   router.post('/remove/:id', isLoggedIn, (req, res) => {
     console.log(req.params.id);
     User.findOne({'_id': req.user.id}, (err, user) => {
       for (var i = 0; i < req.user.watchList.length; i++) {
         if (req.user.watchList[i].imdbid === req.params.id) {
+          console.log();
+          const newMovie = req.user.watchList[i];
+          const msg = 'Movie added to your collection';
           req.user.watchList.remove(req.user.watchList[i]);
           req.user.save();
           res.redirect('/view_watchList');
-
         }
       }
     });
   });
-}
+
 
 /* Edit Movie In Collection */
 // router.post('/update/:id', (req, res, next) => {

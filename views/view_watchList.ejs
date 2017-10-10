@@ -5,8 +5,10 @@
 <%}else { %>
   <h1 class="text-center">WatchList (0)</h1>
 <%}%>
-<ul><hr>
+<h3 style="color:#fff;"class="text-center"><%= err %></h3><br><br>
+<ul class="ul"><hr>
   <% watchList.forEach(movie => { %>
+
     <li style="padding-left:20px;padding-right:20px">
       <div class="row demo">
         <div class="col-md-3 text-center">
@@ -27,7 +29,7 @@
             <input type="submit" class="btn btn-default boldtext"name="" value="More Info">
           </form><br>
 
-          <form id="editForm" class="text-center" action="/addCollection" method="post">
+          <form id="editForm" class="text-center" action="/watchlist/add/<%= movie.imdbid %>" method="post">
             <button id="addCollectBtn"class="btn boldtext btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button><br><br>
             <div class="form-group">
               <input type="text" class="form-control" name="title" value="<%= movie.title %>"/>
