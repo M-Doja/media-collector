@@ -258,7 +258,7 @@ router.post('/add_watchlist', isLoggedIn, (req, res) => {
       }
       user.watchList.push(req.body);
       user.save();
-      res.render('home', {movie: user.media, err: req.body.title+' has been added to your watch list'})
+      res.render('view_watchList', {watchList: user.watchList, err: '' });
     }
   });
 });
