@@ -14,13 +14,13 @@
       <div class="form-group"><br>
         <a href="/home"class="btn-text">reset form</a>
       </div>
-    </form><br>
+    </form>
     <p class="text-center red"><b><%= err %></b></p>
     <hr>
 
     <div class="row text-center">
   		<div class="col-md-12">
-        <h2 class="h2 text-center">Movie Collection</h2>
+        <!-- <h2 class="h2 text-center">Movie Collection</h2> -->
         <%  if (currentUser.username && movie.length > 0){ %>
             <p><b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red"><%= movie.length %></span>)</b></p>
         <%  }else { %>
