@@ -1,26 +1,20 @@
 body {
   padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /*background: #e8e9e9;*/
-  /*background: #05e;*/
-  background: #00a0ee
-
+  background-image: url('/images/movie.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .movSrch{
   max-width:500px;
   padding:20px 10px;
   margin: auto;
 }
-/*.navbar-default .navbar-nav {
-  background: #efefef;
-}*/
 #home{
   background: #e8e9e9;
   border-radius: 8px;
   margin-bottom: 50px;
-}
-.wrap {
-  /*padding: 20px;*/
 }
 a {
   color: #00B7FF;
@@ -57,6 +51,9 @@ li {
 }
 #index {
   margin: 100px auto;
+}
+.logWrap {
+  background-size: cover;
 }
 
 
@@ -108,20 +105,26 @@ li {
   color:black;
   font-weight: bold;
 }
+.btn-danger h4 {
+  text-shadow: 1px 1px 2px red;
+}
+.btn-danger img {
+  border: 1px solid #fff;
+}
 .btn-danger {
-  /*background: lightblue;*/
-  /*background: #00B7FF;*/
-  background: #4AB3F4;
-  border-color: darkblue;
+  background-color: #000;
+  border-color: #000;
+  transition: box-shadow .3s  ease;
 }
 .btn-danger:hover,
 .btn-danger:focus,
 .btn-danger:active,
 .btn-danger:active:focus,
 .btn-danger:active:hover  {
-  background: blue;
-  border-color: darkblue;
-  /*background: #4267b2;*/
+  border-color: red;
+  background-color: #000;
+  box-shadow: 8px 8px 8px grey;
+
 }
 
 .boldtext{
@@ -174,7 +177,7 @@ li {
 }
 .clapwrap form,
 .clapwrap ul{
-  box-shadow:6px 6px 9px #333;
+  box-shadow:6px 6px 9px #888;
 }
 
 .clapwrap li {
@@ -211,27 +214,18 @@ li {
   font-weight: bold;
   font-size: 20px;
 }
-#logForm input {
+#logForm input, #logForm .a {
   background:none;
   outline:none;
   border-top:none;
   border-right:none;
   border-left:none;
+  font-size: 1.05em;
+  transition: all .3s linear;
 }
-/* Login / Register Form */
- #regForm {
-  border: 2px solid #000;
-  background-color: #000;
-  opacity: .88;
-  padding: 25px;
-  border-radius: 8px;
-  max-width: 500px;
-  text-align: center;
-  margin: 40px auto 20px;
-  z-index: 999;
-  color:#000;
-  font-weight: bold;
-  font-size: 20px;
+#logForm input[type=submit]:hover, #logForm .a:hover {
+  border-color:red;
+  color:red;
 }
 
 /* Adjust removal modal */

@@ -251,6 +251,16 @@ router.post('/add_watchlist', isLoggedIn, (req, res) => {
     if (err) {
       return console.log(err);
     }else {
+      const userWatch = user.watchList;
+      if (userWatch.length > 0) {
+        /* CHECK FOR DUPLICATES */
+        for (var i = 0; i < userWatch.length; i++) {
+          if (userWatch[i].imdburl === req.body.imdburl) {
+            console.log('Match found');
+            return res.render('search', {movie: user.media, err: 'You already have that movie on your watch list.'})
+          }
+        }
+      }
       req.body.genres = req.body.genres.split(',');
       req.body.actors = req.body.actors.split(',');
       if (req.body.title === '') {

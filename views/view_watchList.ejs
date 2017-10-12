@@ -1,9 +1,10 @@
 <% include partials/header %>
+
     <div class="topSpace"></div>
 <% if(watchList.length > 0) { %>
-  <h1 class="text-center">WatchList (<%- watchList.length %>)</h1>
+  <h1 class="text-center" style="color:#fff;">WatchList (<%- watchList.length %>)</h1>
 <%}else { %>
-  <h1 class="text-center">WatchList (0)</h1>
+  <h1 class="text-center" style="color:#fff;">WatchList (0)</h1>
 <%}%>
 
 <h3 style="color:#fff;"class="text-center"><%= err %></h3><br><br>
