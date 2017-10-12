@@ -188,7 +188,7 @@ li {
 }
 .colorband:nth-child(odd) {
   background: white;
-
+  width: 15%;
   display: inline-block;
 }
 .colorband:nth-child(even) {
