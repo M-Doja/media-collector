@@ -1,7 +1,7 @@
 <% include partials/header %>
 
   <div class="board text-center">
-    <h4 class="text-center"><a href="/home">Collection ></a><a href="/movie/<%= movie.id %>"> <%= movie.title %></a></h4>
+    <h4 class="text-center"><a href="/collection">Collection ></a><a href="/collection/movie/<%= movie.id %>"> <%= movie.title %></a></h4>
     <div id="editForm" class="text-center" >
       <br>
       <div class="">
@@ -95,7 +95,7 @@
         <div class="modal-content">
           <div class="modal-body">
             <h4 class="modal-title">Are you sure you want to permanently delete <%= movie.title %>? </h4><br>
-            <form id="deleteBtnFormPerm" class="text-center" action="/delete/<%= movie.id %>?_method=DELETE" method="post">
+            <form id="deleteBtnFormPerm" class="text-center" action="/collection/delete/<%= movie.id %>?_method=DELETE" method="post">
               <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Yes Remove <%= movie.title %></button>
             </form>
           </div>
@@ -109,7 +109,6 @@
     </div>
 
   </div>
-  <!-- <p class="text-center cid">CID #<%= movie._id %></p> -->
 
 
 

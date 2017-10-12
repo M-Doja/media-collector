@@ -8,7 +8,7 @@
 <%}%>
 
 <h3 style="color:#fff;"class="text-center"><%= err %></h3><br><br>
-<ul class="ul"><h4 class="text-center"><a href="/home">Collection ></a><a href="/view_watchList"> Watchlist</a></h4>
+<ul class="ul"><h4 class="text-center"><a href="/collection">Collection ></a><a href="/watch_list/view"> Watchlist</a></h4>
 <hr>
   <% watchList.reverse().forEach(movie => { %>
 
@@ -28,11 +28,11 @@
           <p><%= movie.plot %></p>
         </div>
         <div class="col-md-3">
-          <form class="text-center" action="/watchlist/<%= movie.imdbid %>" method="get">
+          <form class="text-center" action="/watch_list/<%= movie.imdbid %>" method="get">
             <input type="submit" class="btn btn-default boldtext"name="" value="More Info">
           </form><br>
 
-          <form id="editForm" class="text-center" action="/watchlist/add/<%= movie.imdbid %>" method="post">
+          <form id="editForm" class="text-center" action="/watch_list/add/<%= movie.imdbid %>" method="post">
             <button id="addCollectBtn"class="btn boldtext btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button><br><br>
             <div class="form-group">
               <input type="text" class="form-control" name="title" value="<%= movie.title %>"/>
@@ -52,7 +52,7 @@
             </div>
           </form>
 
-          <form id="deleteBtnFormPerm" class="text-center" action="/remove/<%= movie.imdbid %>?_method=DELETE" method="post">
+          <form id="deleteBtnFormPerm" class="text-center" action="/watch_list/remove/<%= movie.imdbid %>?_method=DELETE" method="post">
             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>  Remove From Watchlist</button>
           </form><br>
         </div>

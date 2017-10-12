@@ -1,10 +1,9 @@
 <% include partials/header %>
     <div class="topSpace"></div>
 
-
       <div class="board">
-        <h4 class="text-center">Random Pick | <a href="/home"> Back To Collection</a></h4>
-        <form id="editForm" class="text-center" action="/update/<%= movie._id %>?_method=PUT" method="post">
+        <h4 class="text-center">Random Pick | <a href="/collection"> Back To Collection</a></h4>
+        <form id="editForm" class="text-center">
           <br>
           <div class="">
             <h1><%= movie.title %></h1>
@@ -13,7 +12,6 @@
           <div class="">
             <label>Rating: <%= movie.rating.substring(0, 1) %> out of 10 <i class="glyphicon glyphicon-star"></i> stars</label><br>
           </div>
-
 
           <div class="">
             <img alt="Bootstrap Image Preview" src="<%= movie.poster %>" class="img-responsive" /><br><br>
@@ -52,16 +50,9 @@
           <div class="">
             <span><p><%= movie.plot %></p></span>
           </div>
-
-
-          <br>
-
-          <br><br>
-          <!-- <a href="/home">back to collection</a> -->
+          <br><br><br>
         </form>
-
       </div>
-      <!-- <p class="text-center cid">CID #<%= movie._id %></p> -->
 
 
 

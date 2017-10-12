@@ -1,135 +1,47 @@
 
-  <% include partials/header %>
-  <div class="wrap">
-
+<% include partials/header %>
+<div class="wrap">
   <div class=""id="home">
     <div class="topSpace"></div>
-    <div class="topSpace"></div>
-
-    <form action="/home" method="GET" class="form-inline text-center" id="movie-search">
+    <form action="/collection" method="GET" class="form-inline text-center" id="movie-search">
       <div class="group movSrch" style="">
         <input style="width:100%"type="text" id="schFld" name="search" required placeholder="Search collection by movie title..." class="form-control">
         <input class="btn btn-default btn-block" id="srcBtn"  type="submit" value="Search" >
       </div>
       <div class="form-group"><br>
-        <a href="/home"class="btn-text">reset form</a>
+        <a href="/collection"class="btn-text">reset form</a>
       </div>
     </form>
-    <p class="text-center red"><b><%= err %></b></p>
+    <p class="text-center red">
+      <b><%= err %></b>
+    </p>
     <hr>
-
     <div class="row text-center">
   		<div class="col-md-12">
-        <!-- <h2 class="h2 text-center">Movie Collection</h2> -->
         <%  if (currentUser.username && movie.length > 0){ %>
-            <p><b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red"><%= movie.length %></span>)</b></p>
+            <p>
+              <b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red"><%= movie.length %></span>)</b>
+            </p>
         <%  }else { %>
-            <p><b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red">0</span>)</b></p>
+            <p>
+              <b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red">0</span>)</b>
+            </p>
         <%} %>
         <br><br>
-          <ul class="flex-container wrap" id="cardContainer">
-
-            <% for(var i = movie.length; i-- > 0;){ %>
-
-              <p style="margin:30px auto; padding-left:4.5%; padding-right:4.5%;">
-                <a href="/movie/<%= movie[i].id %>">
-                  <button class="btn btn-danger text-center"  name="<%= movie[i].title %>">
-                    <h4><%= movie[i].title.substring(0, 15) %></h4><br>
-                    <img class="imgWatchList"src="<%= movie[i].poster %>" width="140" alt="<%= movie[i].title %> poster image">
-                    <!-- <p><b>Released:</b> <%= movie.year %></p>
-                    <p><b>Rated:</b> <%= movie.rated %></p>
-                    <p><b>Genre:</b> <%= movie.genres %></p>
-                    <p><b>Starring:</b> <%= movie.actors %></p> -->
-                  </button>
-                </a>
-
-              </p>
-
-              <li class="li flex-item">
-                <div class="card text-center">
-                  <h1 class="h1top"><b><%= movie[i].title %></b></h1>
-                  <img alt="Bootstrap Image Preview" class="poster img-responsive" src="<%= movie[i].poster %>" />
-
-        					<p>
-                    <span><b>Released:</b> <%= movie[i].year %> | <b>runtime:</b> <%= movie[i].runtime %> | <b>Rated:</b> <%= movie[i].rated %></span>
-                  </p>
-
-                  <!-- <p><b>Genre:</b> <%= movie[i].genres %></p> -->
-                  <p>
-                    <span style="margin-bottom:-10px;display:block"><b>Genres:</b></span>
-                    <% for(var t = movie[i].genres.length; t-- > 0;){ %>
-                        <form  style="display:inline;" action="/search/genres"method="post">
-                          <input type="text" class="form-search" name="genre" value="<%= movie[i].genres[t] %>">
-                          <button style="padding:3px;"type="submit" class="genreBtn"><%= movie[i].genres[t] %></button>
-                        </form>
-                    <% } %>
-                  </p>
-
-        					<p>
-                    <span style="margin-bottom:-10px;display:block"><b>Starring:</b></span>
-                    <% for(var t = movie[i].actors.length; t-- > 0;){ %>
-                        <form  style="display:inline;" action="/search/actors"method="post">
-                          <input type="text" class="form-search" name="actor" value="<%= movie[i].actors[t] %>">
-                          <button style="padding:3px;"type="submit" class="actorBtn"><%= movie[i].actors[t] %></button>
-                        </form>
-                    <% } %>
-                  </p>
-
-        					<span><a href="<%= movie[i].imdburl %>" target="_blank">View on IMDB website</a></span>
-
-                 <div class="forms-wrap">
-                   <br>
-                   <form id="deleteBtnForm" class="">
-                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#EDIT<%= movie[i].id %>"><span class="glyphicon glyphicon-trash"></span> Trash</button>
-                   </form>
-
-                   <!-- <form id="editBtnForm" action="/edit/<%= movie[i].id %>" method="get">
-                     <button data-toggle="collapse" data-target="#demo" class="btn btn-danger"><span class="glyphicon glyphicon-edit"></span> Edit </button>
-                   </form> -->
-
-                   <form id="viewBtnForm"class="" action="/movie/<%= movie[i].id %>" method="get">
-                     <button type="submit" class="btn btn-danger"name="button">Read More</button>
-                   </form>
-                   <div style="margin-bottom:6em;height:50px;"></div>
-                 </div>
-                 <!-- Confirnm Delete Modal -->
-                 <div id="EDIT<%= movie[i].id %>" class="modal fade" role="dialog">
-                   <div class="modal-dialog">
-
-                     <!-- Modal content-->
-                     <div class="modal-content">
-                       <div class="modal-body">
-                         <h4 class="modal-title">Are you sure you want to permanently delete <%= movie[i].title %>? </h4><br>
-                         <form id="deleteBtnFormPerm" class="" action="/delete/<%= movie[i].id %>?_method=DELETE" method="post">
-                           <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Yes Remove <%= movie[i].title %></button>
-                         </form>
-                       </div>
-                       <div class="modal-footer">
-                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                       </div>
-
-                     </div>
-
-                   </div>
-                 </div>
-
-               </div> <!-- End Card -->
-               </li>
-             <% } %>
-           </ul>
-
-
-
-
-  		</div>
-        </div>
+        <section class="flex-container wrap">
+          <% for(var i = movie.length; i-- > 0;){ %>
+            <p style="margin:30px auto; padding-left:4.5%; padding-right:4.5%;">
+              <a href="/collection/movie/<%= movie[i].id %>">
+                <button class="btn btn-danger text-center"  name="<%= movie[i].title %>">
+                  <h4><%= movie[i].title.substring(0, 15) %></h4><br>
+                  <img class="imgWatchList"src="<%= movie[i].poster %>" width="140" alt="<%= movie[i].title %> poster image">
+                </button>
+              </a>
+            </p>
+           <% } %>
+         </section>
+    		</div>
+      </div>
   	</div>
   </div>
-
-    <script type="text/javascript">
-    // const val = document.getElementById('schFld').value;
-    // val.toUpperCase();
-
-    </script>
-
 <% include partials/footer %>

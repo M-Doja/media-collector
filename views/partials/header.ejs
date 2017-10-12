@@ -22,20 +22,20 @@
         <span class="icon-bar"></span>
       </button>
       <div class="navbar-brand">
-        <a href="/home" id="brandName"><img src="/images/media.png" alt="media icon" width=25> <span class="brand">Media Collector</span></a>
+        <a href="/collection" id="brandName"><img src="/images/media.png" alt="media icon" width=25> <span class="brand">Media Collector</span></a>
       </div>
     </div>
     <div class="navbar-collapse collapse" id="myNavbar">
       <ul class="navbar-nav nav navbar-right">
       <%  if (!currentUser){ %>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/register">Sign Up</a></li>
+          <li><a href="/users/login">Login</a></li>
+          <li><a href="/users/register">Sign Up</a></li>
       <%  }else { %>
-        <li><a href="/home" class="">Collection</a></li>
-          <li><a href="/now_showing" class="">Now Showing</a></li>
-          <li><a href="/view_watchList" class=""> Watch List</a></li>
+        <li><a href="/collection" class="">Collection</a></li>
+          <li><a href="/collection/now_showing" class="">Now Showing</a></li>
+          <li><a href="/watch_list/view" class=""> Watch List</a></li>
           <li><a href="/search" class=""> Search for Movies</a></li>
-          <li><a href="/logout">Log Out</a></li>
+          <li><a href="/users/logout">Log Out</a></li>
       <%  } %>
 
       </ul>

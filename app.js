@@ -1,5 +1,3 @@
-require('dotenv');
-
 const express = require('express'),
       path = require('path'),
       favicon = require('serve-favicon'),
@@ -14,6 +12,9 @@ const express = require('express'),
       keys = require('./config/keys'),
       User = require('./models/User'),
       index = require('./routes/index'),
+      searchRoutes = require('./routes/searchRoutes'),
+      watchRoutes = require('./routes/watchlistRoutes'),
+      collectionRoutes = require('./routes/collectionRoutes'),
       users = require('./routes/users');
 
 const app = express();
@@ -47,7 +48,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(require('express-session')({
   secret: "ku345bli9HUcy4",
   resave: false,
@@ -71,6 +71,9 @@ require('./routes/authRoutes')(app);
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/collection', collectionRoutes);
+app.use('/search', searchRoutes);
+app.use('/watch_list', watchRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

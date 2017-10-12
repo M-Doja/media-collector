@@ -1,11 +1,10 @@
 <% include partials/header %>
 
   <div class="board">
-    <h4 class="text-center"><a href="/home">Collection ></a><a href="/view_watchList"> Watchlist ></a><a href="/watchlist/<%= movie.imdbid %>"> <%= movie.title %></a></h4>
+    <h4 class="text-center"><a href="/collection">Collection ></a><a href="/watch_list/view"> Watchlist ></a><a href="/watch_list/<%= movie.imdbid %>"> <%= movie.title %></a></h4>
     <div class="topSpace"></div>
 
     <form id="editForm" class="text-center" action="/addCollection" method="post">
-      <!-- <button id="addCollectBtn"class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button> -->
 
       <div class="">
         <h1><%= movie.title %></h1>
@@ -14,7 +13,6 @@
       <div class="">
         <label>Rating: <%= movie.rating %> out of 10 <i class="glyphicon glyphicon-star"></i> stars</label><br>
       </div>
-
 
       <div class="">
         <img alt="Bootstrap Image Preview" src="<%= movie.poster %>" class="img-responsive" /><br><br>
@@ -63,9 +61,7 @@
         <label>Production: </label>
         <span><%= movie.production %></span><br>
       </div>
-      <br>
-
-      <br><br>
+      <br><br><br>
 
       <!-- data sent from this form -->
       <div class="form-group">
@@ -86,8 +82,5 @@
       </div>
     </form>
   </div>
-
-
-
 
 <% include partials/footer %>

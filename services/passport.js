@@ -3,7 +3,7 @@ const passport       = require('passport'),
       mongoose       = require('mongoose'),
       keys           = require('../config/keys');
 
-const User =  require('../models/User')
+const User = require('../models/User')
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

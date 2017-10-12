@@ -2,22 +2,9 @@
     <div class="topSpace"></div>
     <br><br>
 
-
-    <!-- <form id="regForm"class="" action="/register" method="post">
-      <h4>Sign Up</h4>
-      <input type="text"  class="form-control" name="username" placeholder="User name">
-      <input type="text"  class="form-control" name="password" placeholder="Password">
-      <br>
-      <p><a href="/login">Already a member?</a></p>
-      <input class="btn btn-primary" type="submit"><br><br>
-    </form> -->
     <h2 class="text-center red"><%= message %></h2>
 
-    <!-- <h1 style="color:white;font-family:Varela Round;text-shadow:1px 2px 2px #555;" class="text-center">Sign Up</h1> -->
      <div class="clapper">
-       <ul>
-
-       </ul>
        <div class="clapwrap container" style="">
          <ul class="row"style="background-color:black;">
            <div class="top col-xs-12 text-center">
@@ -28,18 +15,18 @@
              <li class="colorband"></li>
            </div>
         </ul>
-        <form style="color:white;font-family:Varela Round;" id="logForm"class="" action="/register" method="post">
+        <form style="color:white;font-family:Varela Round;" id="logForm"class="" autocomplete="off"action="/users/register" method="post">
           <h1 class="text-center" style="color:white;text-shadow:1.5px 1.5px 1.5px #00B7FF;">Media Collector</h1>
           <p class="text-center" ><b style="border-bottom:1px solid #00B7FF;">Your Personal Movie Library</b></p>
           <br>
-          <input type="text"  class="form-control" name="username" placeholder="User name">
-          <input type="text"  class="form-control" name="password" placeholder="Password">
+          <input type="text"  autocomplete="nope" class="form-control" name="username" placeholder="User name">
+          <input type="password" autocomplete="new-password" minlength="8" class="form-control" name="password" placeholder="Password">
           <br>
           <p><a href="/login">Already a member?</a></p>
           <input class="btn btn-primary" type="submit"value="Sign Up"><br><br>
         </form>
-
        </div>
-     </div><br><br><br><br>
+     </div>
+     <br><br><br><br>
 
 <% include partials/footer %>
