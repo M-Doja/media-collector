@@ -6,8 +6,8 @@ const express = require('express'),
 
  /* Log In */
 router.post('/login', passport.authenticate('local', {
-   successRedirect: 'collection',
-   failureRedirect: 'register'
+   successRedirect: '/collection',
+   failureRedirect: '/register'
 }), (req, res) => {
 
 });

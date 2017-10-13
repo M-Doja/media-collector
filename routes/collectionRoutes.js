@@ -10,43 +10,27 @@ const express = require('express'),
 router.get('/', middleWare.isLoggedIn, (req, res, next) => {
  if(req.query.search) {
    const regex = req.query.search;
-   User.find({'_id': req.user.id}, function(err, user){
-      if(err){
-         console.log(err);
-      } else {
-         for (var i = 0; i < user.length; i++) {
-           if (user[i].id === req.user.id) {
-             const mediaArr = user[i].media;
-             for (var i = 0; i < mediaArr.length; i++) {
-               if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
-                 const arr = [];
-                 arr.push(mediaArr[i]);
-                 return res.render('home',{movie: arr, err: ''});
-               }
-             }
-             res.render('home',{movie: mediaArr, err: 'Sorry no movie by that title found.'} )
-           }
-         }
-       }
-   });
+   const mediaArr = req.user.media;
+   for (var i = 0; i < mediaArr.length; i++) {
+     if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
+       const arr = [];
+       arr.push(mediaArr[i]);
+       return res.render('home',{movie: arr, err: ''});
+     }
+   }
+   res.render('home',{movie: mediaArr, err: 'Sorry no movie by that title found.'} )
  }else {
-   User.find({}, (err, user) => {
-     const search = 'The Transporter';
-     imdb.get(search ,{apiKey: 'thewdb'})
-     .then( movie => {
-       if (req.user.media.length < 1) {
-         const genreArr = [];
-         res.render('home',  {movie: movie, err: '', genres: genreArr});
-       }else {
-         for (var i = 0; i < req.user.media.length; i++) {
-           const genreArr = req.user.media[i].genres;
-           res.render('home',  {movie: req.user.media, err: '', genres: genreArr});
-         }
-       }
-       console.log('Movie saved to collection');
-     })
-      .catch(console.log);
-   });
+   if (req.user.media < 1) {
+     const genreArr = [];
+     const movie = [];
+     res.render('home',  {movie: movie, err: '', genres: genreArr});
+   }else {
+     for (var i = 0; i < req.user.media.length; i++) {
+       const genreArr = req.user.media[i].genres;
+       res.render('home',  {movie: req.user.media, err: '', genres: genreArr});
+     }
+   }
+   console.log('Movie saved to collection');
  }
 });
 
