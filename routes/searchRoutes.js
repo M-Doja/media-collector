@@ -24,7 +24,7 @@ router.post('/actors', middleWare.isLoggedIn, (req, res) => {
        }
      });
    });
-   res.render('home',{movie:movieArr, err: 'Search Results: ', errMsg: req.body.actor+' movies' });
+   res.render('home',{movie:movieArr, err: ' ', errMsg:' ' ,q:req.body.actor});
 });
 
  // Filter Search DB by genre
@@ -39,7 +39,7 @@ router.post('/genres', middleWare.isLoggedIn, (req, res) => {
        }
      });
    });
-   res.render('home',{movie:movieArr, err: 'Search Results: ', errMsg: req.body.genre+' movies' });
+   res.render('home',{movie:movieArr, err: '', errMsg:' ', q: req.body.genre });
 });
 
 
@@ -94,7 +94,7 @@ router.post('/add_collection', middleWare.isLoggedIn, (req, res) => {
         for (var x = 0; x < user.media[i].genres.length; x++) {
           console.log('User Genres:'+ user.media[i].genres[x]);
           const genreArr = user.media[i].genres[x]
-          res.render('home', {movie: user.media, err: '', genres: genreArr, errMsg:''});
+          res.render('home', {movie: user.media, err: '', genres: genreArr, errMsg:'', q: ''});
           // res.redirect('/home');
         }
       }
