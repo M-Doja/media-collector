@@ -95,6 +95,7 @@ router.post('/add_collection', middleWare.isLoggedIn, (req, res) => {
           console.log('User Genres:'+ user.media[i].genres[x]);
           const genreArr = user.media[i].genres[x]
           res.render('home', {movie: user.media, err: '', genres: genreArr});
+          // res.redirect('/home');
         }
       }
     }

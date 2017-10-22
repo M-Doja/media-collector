@@ -62,6 +62,22 @@ router.post('/delete/:id', middleWare.isLoggedIn, (req, res) => {
  });
 });
 
+/* Get User Collection Settings */
+ router.get('/settings/:id', middleWare.isLoggedIn, (req, res, next) => {
+   User.findById(req.user.id, (err, user) => {
+     res.render('settings', {user: user, message: ''});
+   });
+ });
+
+/* Remove All Movies from Collection */
+router.get('/delete_all/:id', middleWare.isLoggedIn, (req, res) => {
+  User.findOne({'_id': req.user.id}, (err, user) => {
+    user.media = [];
+    user.save();
+    res.render('settings', {user: user, message: 'Collection has been deleted'});
+  });
+});
+
 function random_movie(movies){
  return movies[Math.floor(Math.random()* movies.length)];
 }

@@ -18,7 +18,7 @@
     <hr>
     <div class="row text-center">
   		<div class="col-md-12">
-        <%  if (currentUser.username && movie.length > 0){ %>
+        <!-- <%  if (currentUser.username && movie.length > 0){ %>
             <p>
               <b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red"><%= movie.length %></span>)</b>
             </p>
@@ -26,13 +26,14 @@
             <p>
               <b><%= currentUser.username.toUpperCase()  %>'s Collection Total (<span class="red">0</span>)</b>
             </p>
-        <%} %>
+        <%} %> -->
         <br><br>
         <section class="flex-container wrap">
           <% for(var i = movie.length; i-- > 0;){ %>
             <p style="margin:30px auto; padding-left:4.5%; padding-right:4.5%;">
               <a href="/collection/movie/<%= movie[i].id %>">
                 <button class="btn btn-danger text-center"  name="<%= movie[i].title %>">
+
                   <h4><%= movie[i].title.substring(0, 15) %></h4><br>
                   <img class="imgWatchList"src="<%= movie[i].poster %>" width="140" alt="<%= movie[i].title %> poster image">
                 </button>

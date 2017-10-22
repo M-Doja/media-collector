@@ -1,0 +1,84 @@
+<% include partials/header %>
+    <div class="topSpace"></div>
+    <br><br>
+
+
+
+     <div id="settingWrap" class="text-center">
+
+
+       <!-- <p class="text-center whiteShade"><%= user %></p> -->
+
+       <div class="text-center whiteShade">
+         <h2 class="text-center red"><%= message %></h2>
+         <h1>Settings</h1>
+         <h3>Account Owner: <%= user.username %></h3>
+         <h5>Account Number: <%= user._id %></h5>
+         <p>
+           Items in media collection: <span>(<%= user.media.length %>)</span>
+         </p>
+         <p>Items on watch-list collection: <span>(<%= user.watchList.length %>)</span></p>
+
+         <a href="#"><button type="button" data-toggle="modal" data-target="#deleteCollectionModal"><i class="glyphicon glyphicon-trash"></i> Remove Entire Collection</button></a>
+         <br><br>
+         <a href="#"><button type="button"  data-toggle="modal" data-target="#deleteUserModal">Delete Account</button></a>
+         <div class="topSpace">
+
+         </div>
+       </div>
+
+       <!-- Trigger the modal with a button -->
+
+
+      <!-- Delete User Modal -->
+      <div id="deleteUserModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title ">Are you sure you want to delete your account?</h4>
+            </div>
+            <div class="modal-body">
+              <p class="red">All Data Will Permanently Be Lost!</p>
+              <a class="btn btn-danger btn-lg" href="/users/remove_acct/<%= user._id %>">Yes Delete Account</a>
+            </div>
+            <div class="text-center ">
+              <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+            </div>
+            <div class="topSpace">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Collection Modal -->
+      <div id="deleteCollectionModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title ">Are you sure you want to delete your entire media collection?</h4>
+            </div>
+            <div class="modal-body">
+              <p class="red">All Data Will Permanently Be Lost!</p>
+              <a class="btn btn-danger btn-lg" href="/collection/delete_all/<%= user._id%>">Yes Delete All Media</a>
+            </div>
+            <div class="text-center ">
+              <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+            </div>
+            <div class="topSpace">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+     </div>
+     <br><br><br><br>
+
+<% include partials/footer %>
