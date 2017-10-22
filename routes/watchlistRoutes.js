@@ -18,7 +18,9 @@ router.get('/:id', middleWare.isLoggedIn, (req, res) => {
    User.findOne({'_id': req.user.id}, (err, user) => {
      for (var i = 0; i < user.watchList.length; i++) {
        if (user.watchList[i].imdbid === req.params.id) {
-         res.render('movieWatchListView', {movie: user.watchList[i]});
+         const RatingArr = user.watchList[i].rating[0].split('.')[0];
+         console.log(RatingArr);
+         res.render('movieWatchListView', {movie: user.watchList[i], rating: user.watchList[i].rating[0].split('.')[0] });
        }
      }
    });
