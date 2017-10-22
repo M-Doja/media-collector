@@ -2,7 +2,7 @@ const express = require('express'),
      router = express.Router(),
      imdb = require('imdb-api'),
      User = require('../models/User'),
-     MiddleWare = require('../middleWare'),
+     MiddleWare = require('../middleware'),
      passport = require('passport');
 
 
