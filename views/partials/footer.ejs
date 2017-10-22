@@ -1,10 +1,16 @@
 
 
     </div>
-    <footer class="footer text-center"><p id="foot"></p></footer>
+    <footer class="footer text-center">
+      Developed by Micah Dunson - &copy <span id="footYear"></span>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="javascripts/app.js" charset="utf-8"></script>
+    <script>
+      const FooterYear = document.getElementById('footYear');
+      let currentYear = new Date().getFullYear();
+      FooterYear.innerHTML = currentYear;
+    </script>
   </body>
 </html>

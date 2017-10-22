@@ -12,41 +12,35 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel="shortcut icon" href="/images/media.png">
   <title>Media Collector</title>
-  <style media="screen">
-    .form-group input, .form-group textarea { display: none;}
-  </style>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="navbar-brand">
-        <a href="/collection" id="brandName"><img src="/images/media.png" alt="media icon" width=25> <span class="brand">Media Collector</span></a>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mediaCollectorNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand">
+          <a href="/collection" id="brandName"><img src="/images/media.png" alt="media icon" width=25> <span class="brand">Media Collector</span></a>
+        </div>
+      </div>
+      <div class="navbar-collapse collapse" id="mediaCollectorNavbar">
+        <ul class="navbar-nav nav navbar-right">
+        <%  if (!currentUser){ %>
+            <li><a href="/users/login">Login</a></li>
+            <li><a href="/users/register">Sign Up</a></li>
+        <%  }else { %>
+            <li><a href="/collection" class="">Home</a></li>
+            <li><a href="/search" class=""> Movie Search</a></li>
+            <li><a href="/collection/now_showing" class="">Now Showing</a></li>
+            <li><a href="/watch_list/view" class=""> Watch List</a></li>
+            <li><a href="/collection/settings/<%= currentUser._id %>">Settings</a></li>
+            <li><a href="/users/logout">Log Out</a></li>
+        <%  } %>
+        </ul>
       </div>
     </div>
-    <div class="navbar-collapse collapse" id="myNavbar">
-      <ul class="navbar-nav nav navbar-right">
-      <%  if (!currentUser){ %>
-          <li><a href="/users/login">Login</a></li>
-          <li><a href="/users/register">Sign Up</a></li>
-      <%  }else { %>
-
-          <li><a href="/collection" class="">Home</a></li>
-          <li><a href="/search" class=""> Movie Search</a></li>
-          <li><a href="/collection/now_showing" class="">Now Showing</a></li>
-          <li><a href="/watch_list/view" class=""> Watch List</a></li>
-
-          <li><a href="/collection/settings/<%= currentUser._id %>">Settings</a></li>
-          <li><a href="/users/logout">Log Out</a></li>
-      <%  } %>
-
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="demo">
+  </nav>
+  <div class="demo">

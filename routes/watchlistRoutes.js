@@ -2,46 +2,40 @@ const express = require('express'),
      router = express.Router(),
      imdb = require('imdb-api'),
      User = require('../models/User'),
-     middleWare = require('../middleware'),
+     MiddleWare = require('../middleWare'),
      passport = require('passport');
 
 
  /* View Watchlist */
-router.get('/view', middleWare.isLoggedIn, (req, res) => {
+router.get('/view', MiddleWare.isLoggedIn, (req, res) => {
    User.findOne({'_id': req.user.id}, (err, user) => {
      res.render('view_watchList', {watchList: user.watchList, err: '' });
    })
 });
 
  /* View Single Movie In Watchlist */
-router.get('/:id', middleWare.isLoggedIn, (req, res) => {
+router.get('/:id', MiddleWare.isLoggedIn, (req, res) => {
    User.findOne({'_id': req.user.id}, (err, user) => {
-     for (var i = 0; i < user.watchList.length; i++) {
-       if (user.watchList[i].imdbid === req.params.id) {
-         const RatingArr = user.watchList[i].rating[0].split('.')[0];
-         console.log(RatingArr);
-         res.render('movieWatchListView', {movie: user.watchList[i], rating: user.watchList[i].rating[0].split('.')[0] });
-       }
-     }
+    user.watchList.forEach(movie => {
+      if (movie.imdbid === req.params.id) {
+        const RatingArr = movie.rating[0].split('.')[0];
+        res.render('movieWatchListView', {movie: movie, rating: movie.rating[0].split('.')[0] });
+      }
+    })
    });
  });
 
  /* Add Single Movie In Watchlist To Collection */
- router.post('/add/:id', middleWare.isLoggedIn, (req, res, next) => {
-   console.log(req.params.id);
+ router.post('/add/:id', MiddleWare.isLoggedIn, (req, res, next) => {
    User.findOne({'_id': req.user.id}, (err, user) => {
-
      for (var i = 0; i < req.user.watchList.length; i++) {
-
        if (req.user.watchList[i].imdbid === req.params.id) {
          const newMovie = req.user.watchList[i];
          const userMedia = req.user.media;
-
+         /* CHECK FOR DUPLICATES */
          if (userMedia.length > 0) {
-           /* CHECK FOR DUPLICATES */
            for (var i = 0; i < userMedia.length; i++) {
              if (userMedia[i].imdburl === newMovie.imdburl) {
-               console.log('Match found');
                return res.render('view_watchList', { watchList:req.user.watchList, err: 'You already have that movie in your collection.'})
              }
            }
@@ -57,12 +51,10 @@ router.get('/:id', middleWare.isLoggedIn, (req, res) => {
  });
 
  /* Remove Movie From Watchlist */
-   router.post('/remove/:id', middleWare.isLoggedIn, (req, res) => {
-     console.log(req.params.id);
+   router.post('/remove/:id', MiddleWare.isLoggedIn, (req, res) => {
      User.findOne({'_id': req.user.id}, (err, user) => {
        for (var i = 0; i < req.user.watchList.length; i++) {
          if (req.user.watchList[i].imdbid === req.params.id) {
-           console.log();
            const newMovie = req.user.watchList[i];
            const msg = 'Movie added to your collection';
            req.user.watchList.remove(req.user.watchList[i]);

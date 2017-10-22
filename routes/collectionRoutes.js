@@ -30,7 +30,6 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
        res.render('home',  {movie: req.user.media, err: '', genres: genreArr, errMsg: '', q: ''});
      }
    }
-   console.log('Movie saved to collection');
  }
 });
 

@@ -1,17 +1,16 @@
 <% include partials/header %>
 
-    <div class="topSpace"></div>
-<% if(watchList.length > 0) { %>
-  <h1 class="text-center" style="color:#fff;">WatchList (<%- watchList.length %>)</h1>
-<%}else { %>
-  <h1 class="text-center" style="color:#fff;">WatchList (0)</h1>
-<%}%>
+  <div class="topSpace"></div>
+  <% if(watchList.length > 0) { %>
+    <h1 class="text-center" style="color:#fff;">WatchList (<%- watchList.length %>)</h1>
+  <%}else { %>
+    <h1 class="text-center" style="color:#fff;">WatchList (0)</h1>
+  <%}%>
 
-<h3 style="color:#fff;"class="text-center"><%= err %></h3><br><br>
-<ul class="ul"><h4 class="text-center"><a href="/collection">Collection ></a><a href="/watch_list/view"> Watchlist</a></h4>
-<hr>
+  <h3 style="color:#fff;"class="text-center"><%= err %></h3><br><br>
+  <ul class="ul"><h4 class="text-center"><a href="/collection">Collection ></a><a href="/watch_list/view"> Watchlist</a></h4>
+  <hr>
   <% watchList.reverse().forEach(movie => { %>
-
     <li style="padding-left:20px;padding-right:20px">
       <div class="row demo">
         <div class="col-md-3 text-center">
@@ -54,15 +53,13 @@
 
           <form id="deleteBtnFormPerm" class="text-center" action="/watch_list/remove/<%= movie.imdbid %>?_method=DELETE" method="post">
             <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>  Remove From Watchlist</button>
-          </form><br>
+          </form>
+          <br>
         </div>
       </div>
     </li>
     <hr>
-
-
   <%})%>
 </ul>
-
 
 <% include partials/footer %>

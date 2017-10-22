@@ -15,7 +15,6 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
  // Filter Search DB by actor
 router.post('/actors', middleWare.isLoggedIn, (req, res) => {
    const movieArr = [];
-   console.log(req.body.actor);
    req.user.media.forEach(movie => {
      movie.actors.forEach(actor => {
        if (actor === req.body.actor || actor === ' '+req.body.actor ) {
@@ -30,7 +29,6 @@ router.post('/actors', middleWare.isLoggedIn, (req, res) => {
  // Filter Search DB by genre
 router.post('/genres', middleWare.isLoggedIn, (req, res) => {
    const movieArr = [];
-   console.log(req.body.genre);
    req.user.media.forEach(movie => {
      movie.genres.forEach(genre => {
        if (genre === req.body.genre || genre === ' '+req.body.genre ) {
@@ -70,7 +68,6 @@ router.get('/results', (req, res) => {
 router.post('/add_collection', middleWare.isLoggedIn, (req, res) => {
   User.findOne({_id: req.user.id}, (err, user) => {
     if (err) {
-      console.log(err);
       return res.render('error', {message: err.message, error: err});
     }else {
       const userMedia = user.media;
@@ -78,7 +75,6 @@ router.post('/add_collection', middleWare.isLoggedIn, (req, res) => {
         /* CHECK FOR DUPLICATES */
         for (var i = 0; i < userMedia.length; i++) {
           if (userMedia[i].imdburl === req.body.imdburl) {
-            console.log('Match found');
             return res.render('search', {movie: user.media, err: 'You already have that movie in your collection.'})
           }
         }
@@ -92,10 +88,8 @@ router.post('/add_collection', middleWare.isLoggedIn, (req, res) => {
       user.save();
       for (var i = 0; i < user.media.length; i++) {
         for (var x = 0; x < user.media[i].genres.length; x++) {
-          console.log('User Genres:'+ user.media[i].genres[x]);
           const genreArr = user.media[i].genres[x]
           res.render('home', {movie: user.media, err: '', genres: genreArr, errMsg:'', q: ''});
-          // res.redirect('/home');
         }
       }
     }
@@ -113,7 +107,6 @@ router.post('/add_watchlist', middleWare.isLoggedIn, (req, res) => {
         /* CHECK FOR DUPLICATES */
         for (var i = 0; i < userWatch.length; i++) {
           if (userWatch[i].imdburl === req.body.imdburl) {
-            console.log('Match found');
             return res.render('search', {movie: user.media, err: 'You already have that movie on your watch list.'})
           }
         }
@@ -129,6 +122,5 @@ router.post('/add_watchlist', middleWare.isLoggedIn, (req, res) => {
     }
   });
 });
-
 
 module.exports = router;

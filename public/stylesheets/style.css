@@ -100,7 +100,9 @@ li {
 .form-group input,
 .form-group textarea {
   max-width: 500px;
+  display: none;
 }
+
 .form-search {
   display: none;
 }

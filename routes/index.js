@@ -30,6 +30,4 @@ router.get('/addCollection', middleWare.isLoggedIn, (req, res, next) => {
   res.render('/addCollection');
 });
 
-
-
 module.exports = router;

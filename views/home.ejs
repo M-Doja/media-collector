@@ -1,37 +1,30 @@
-
 <% include partials/header %>
+
 <div class="wrap">
   <div class=""id="home">
     <div class="topSpace"></div>
     <form action="/collection" method="GET" class="form-inline text-center" id="movie-search">
       <div class="group movSrch" style="">
         <input style="width:100%;text-align:center;"type="text" id="schFld" name="search" required placeholder="Search collection by movie title..." class="form-control">
-        <!-- <b> -->
-          <input style="font-weight:bold;"class="btn btn-default btn-block" id="srcBtn"  type="submit" value="Search" >
-        <!-- </b> -->
+        <input style="font-weight:bold;"class="btn btn-default btn-block" id="srcBtn"  type="submit" value="Search" >
       </div>
       <div class="form-group"><br>
         <b><%= err %><span class="red"><%= errMsg %></span></b><br><br>
         <a href="/collection"class="btn-text">clear search results</a>
       </div>
     </form>
-    <p class="text-center red">
-
-    </p>
     <hr>
     <div class="row text-center">
   		<div class="col-md-12">
-            <p>
-              <b>(<span class="red"><%= movie.length %></span>) <span class="red"><%= q %></span> movies in collection</b>
-            </p>
-
+        <p>
+          <b>(<span class="red"><%= movie.length %></span>) <span class="red"><%= q %></span> movies in collection</b>
+        </p>
         <br><br>
         <section class="flex-container wrap">
           <% for(var i = movie.length; i-- > 0;){ %>
             <p style="margin:30px auto; padding-left:4.5%; padding-right:4.5%;">
               <a href="/collection/movie/<%= movie[i].id %>">
                 <button class="btn btn-danger text-center"  name="<%= movie[i].title %>">
-
                   <h4><%= movie[i].title.substring(0, 15) %></h4><br>
                   <img class="imgWatchList"src="<%= movie[i].poster %>" width="140" alt="<%= movie[i].title %> poster image">
                 </button>
@@ -43,4 +36,5 @@
       </div>
   	</div>
   </div>
+
 <% include partials/footer %>
