@@ -15,7 +15,7 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
      if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
        const arr = [];
        arr.push(mediaArr[i]);
-       return res.render('home',{movie: arr, err: '', errMsg:'', q:''});
+       return res.render('home',{movie: arr, err: '', errMsg: '', q: ''});
      }
    }
    res.render('home',{movie: mediaArr, err: 'Sorry no movie by that title found.', errMsg: '', q: ''} )
@@ -23,7 +23,7 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
    if (req.user.media < 1) {
      const genreArr = [];
      const movie = [];
-     res.render('home',  {movie: movie, err: '', genres: genreArr});
+     res.render('home',  {movie: movie, err: '', genres: genreArr, errMsg: '', q: ''});
    }else {
      for (var i = 0; i < req.user.media.length; i++) {
        const genreArr = req.user.media[i].genres;

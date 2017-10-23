@@ -29,3 +29,9 @@ Media Collector is very easy to use.
    like, movie photos and posters, more information about the Cast
    and Crew members, movie trailers, as well a huge list of movie trivia, that can
    a friendly hang out into a whole of fun.
+
+   - Please note this application is Stable and currently ready for use.
+     However this application is still in the Review and Improvement Stage,
+     meaning the refinement and possible addition of application features is
+     still undergoing. If you have a suggestion or an idea for improvement, you
+     request can be sent [here] (https://mailto:dojadeveloper@gmail.com).

@@ -23,7 +23,7 @@ router.post('/actors', middleWare.isLoggedIn, (req, res) => {
        }
      });
    });
-   res.render('home',{movie:movieArr, err: ' ', errMsg:' ' ,q:req.body.actor});
+   res.render('home',{movie:movieArr, err: ' ', errMsg:'' ,q:req.body.actor});
 });
 
  // Filter Search DB by genre
@@ -37,7 +37,7 @@ router.post('/genres', middleWare.isLoggedIn, (req, res) => {
        }
      });
    });
-   res.render('home',{movie:movieArr, err: '', errMsg:' ', q: req.body.genre });
+   res.render('home',{movie:movieArr, err: '', errMsg:'', q: req.body.genre });
 });
 
 
