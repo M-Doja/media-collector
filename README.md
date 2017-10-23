@@ -33,5 +33,4 @@ Media Collector is very easy to use.
    - Please note this application is Stable and currently ready for use.
      However this application is still in the Review and Improvement Stage,
      meaning the refinement and possible addition of application features is
-     still undergoing. If you have a suggestion or an idea for improvement, you
-     request can be sent [here] (https://mailto:dojadeveloper@gmail.com).
+     still undergoing.
