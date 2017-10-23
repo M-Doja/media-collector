@@ -23,7 +23,8 @@ Media Collector is very easy to use.
    collection to watch.
 
  * When looking for a movie to watch the old fashion way, you can search
-   through your movie collection by genre or by actors.    
+   through your movie collection by genre or by actors by simply clicking on the
+   actors name or the movie genre.    
 
  * You also get access to special links related to movies in your collection
    like, movie photos and posters, more information about the Cast
