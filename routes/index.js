@@ -30,4 +30,32 @@ router.get('/addCollection', middleWare.isLoggedIn, (req, res, next) => {
   res.render('/addCollection');
 });
 
+/* Log In */
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/collection',
+  failureRedirect: '/register'
+}), (req, res) => {
+});
+
+/* Register New User */
+router.post('/register', function(req, res, next) {
+  User.register(new User({
+    username: req.body.username
+  }), req.body.password, (err, user) => {
+    if (err) {
+      return res.render('register', {message: err.message, error: err});
+    }
+    passport.authenticate('local')(req, res, () => {
+      var movie = [];
+      res.redirect('/collection');
+    });
+  });
+});
+
+/* Log Out User */
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/login');
+});
+
 module.exports = router;

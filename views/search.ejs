@@ -3,10 +3,13 @@
     <div class="">
       <form class="" action="/search/results" method="get">
         <div class="">
-          <input id="srchInp"class="form-control"type="text" required name="search" placeholder="Enter A Movie Title...(movie titles are case sensitive)"><br>
+          <input id="srchInp"class="form-control"type="text" required name="search" placeholder="Some movie titles are case sensitive"><br>
           <input id="srchBtn"class="btn btn-default btn-block" value="Search For A Movie" type="submit">
         </div>
       <br><br>
+      <% if (movie) { %>
+        <!-- <h4 class="text-center" style="color:#fff;">Enter A Movie Title To Search </h4> -->
+      <%}%>
       <hr>
       </form>
       <h3 class="text-center" style="color:#fff;"><%= err %></h3><br><br>
