@@ -8,7 +8,7 @@ const express = require('express'),
 const alphaArr = [
   'A','B','C','D','E','F','G','H','I',
   'J','K','L','M','N','O','P','Q','R',
-  'S','T','U','V','W','X','Y','Z'
+  'S','T','U','V','W','X','Y','Z','#'
 ];
 
 /* GET home page collection. */
@@ -42,7 +42,7 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
      const al = [
        'A','B','C','D','E','F','G','H','I',
        'J','K','L','M','N','O','P','Q','R',
-       'S','T','U','V','W','X','Y','Z'
+       'S','T','U','V','W','X','Y','Z','#'
      ];
      res.render('home',{
        movie: movie,
@@ -59,7 +59,7 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
        const al = [
          'A','B','C','D','E','F','G','H','I',
          'J','K','L','M','N','O','P','Q','R',
-         'S','T','U','V','W','X','Y','Z'
+         'S','T','U','V','W','X','Y','Z','#'
        ];
        res.render('home',  {
          movie: req.user.media,

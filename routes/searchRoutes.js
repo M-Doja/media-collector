@@ -8,8 +8,10 @@ const express = require('express'),
  const alphaArr = [
    'A','B','C','D','E','F','G','H','I',
    'J','K','L','M','N','O','P','Q','R',
-   'S','T','U','V','W','X','Y','Z'
+   'S','T','U','V','W','X','Y','Z','#'
  ];
+
+const numArr = ['1','2','3','4','5','6','7','8','9','0'];
 
 /* GET search page. */
 router.get('/', middleWare.isLoggedIn, (req, res, next) => {
@@ -45,14 +47,18 @@ router.post('/genres', middleWare.isLoggedIn, (req, res) => {
    res.render('home',{movie:movieArr, err: '', errMsg:'', q: req.body.genre,alpha: alphaArr });
 });
 
-// Filter Search DB alphabetically
+// Filter Search Movies alphabetically / Numberically
 router.post('/movie_alpha', middleWare.isLoggedIn, (req, res) => {
   const movieArr = [];
-  const letterSelection = req.body.letter;
   req.user.media.forEach(movie => {
     movieTitleArr = movie.title.split('');
     const movieLtr = movieTitleArr[0];
-    if (movieLtr == letterSelection) {
+    for (var i = 0; i < numArr.length; i++) {
+      if (movieLtr === numArr[i][0] && req.body.letter == '#') {
+        movieArr.push(movie);
+      }
+    }
+    if (movieLtr == req.body.letter  && movieLtr !== '#' ) {
       movieArr.push(movie);
     }
   });
