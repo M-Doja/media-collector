@@ -19,9 +19,14 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
    for (var i = 0; i < mediaArr.length; i++) {
      if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
        const arr = [];
+       const alphaArr = [
+         'A','B','C','D','E','F','G','H','I',
+         'J','K','L','M','N','O','P','Q','R',
+         'S','T','U','V','W','X','Y','Z','#'
+       ];
        arr.push(mediaArr[i]);
        console.log(alpha);
-       return res.render('home',{movie: arr, err: '', errMsg: '', q: '' , alpha : alphaArr});
+       return res.render('home',{movie: arr, err: '', errMsg: '', q: '' , alpha : 'alphaArr'});
      }
    }
    res.render('home',{
