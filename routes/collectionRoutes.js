@@ -3,13 +3,12 @@ const express = require('express'),
      imdb = require('imdb-api'),
      User = require('../models/User'),
      middleWare = require('../middleware'),
-     passport = require('passport');
-
-const alphaArr = [
-  'A','B','C','D','E','F','G','H','I',
-  'J','K','L','M','N','O','P','Q','R',
-  'S','T','U','V','W','X','Y','Z','#'
-];
+     passport = require('passport'),
+     alphaArr = [
+       'A','B','C','D','E','F','G','H','I',
+       'J','K','L','M','N','O','P','Q','R',
+       'S','T','U','V','W','X','Y','Z','#'
+     ];
 
 /* GET home page collection. */
 router.get('/', middleWare.isLoggedIn, (req, res, next) => {
@@ -19,14 +18,12 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
    for (var i = 0; i < mediaArr.length; i++) {
      if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
        const arr = [];
-       const alphaArr = [
+       arr.push(mediaArr[i]);
+       return res.render('home',{movie: arr, err: '', errMsg: '', q: '' , alpha : [
          'A','B','C','D','E','F','G','H','I',
          'J','K','L','M','N','O','P','Q','R',
          'S','T','U','V','W','X','Y','Z','#'
-       ];
-       arr.push(mediaArr[i]);
-       console.log(alpha);
-       return res.render('home',{movie: arr, err: '', errMsg: '', q: '' , alpha : 'alphaArr'});
+       ]});
      }
    }
    res.render('home',{
