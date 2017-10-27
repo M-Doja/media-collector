@@ -5,6 +5,11 @@ const express = require('express'),
      middleWare = require('../middleware'),
      passport = require('passport');
 
+ const alphaArr = [
+   'A','B','C','D','E','F','G','H','I',
+   'J','K','L','M','N','O','P','Q','R',
+   'S','T','U','V','W','X','Y','Z'
+ ];
 
 /* GET search page. */
 router.get('/', middleWare.isLoggedIn, (req, res, next) => {
@@ -23,7 +28,7 @@ router.post('/actors', middleWare.isLoggedIn, (req, res) => {
        }
      });
    });
-   res.render('home',{movie:movieArr, err: ' ', errMsg:'' ,q:req.body.actor});
+   res.render('home',{movie:movieArr, err: ' ', errMsg:'' ,q:req.body.actor,alpha: alphaArr});
 });
 
  // Filter Search DB by genre
@@ -37,7 +42,21 @@ router.post('/genres', middleWare.isLoggedIn, (req, res) => {
        }
      });
    });
-   res.render('home',{movie:movieArr, err: '', errMsg:'', q: req.body.genre });
+   res.render('home',{movie:movieArr, err: '', errMsg:'', q: req.body.genre,alpha: alphaArr });
+});
+
+// Filter Search DB alphabetically
+router.post('/movie_alpha', middleWare.isLoggedIn, (req, res) => {
+  const movieArr = [];
+  const letterSelection = req.body.letter;
+  req.user.media.forEach(movie => {
+    movieTitleArr = movie.title.split('');
+    const movieLtr = movieTitleArr[0];
+    if (movieLtr == letterSelection) {
+      movieArr.push(movie);
+    }
+  });
+  res.render('home',{movie:movieArr, err: '', errMsg:'', q: req.body.genre,alpha: alphaArr });
 });
 
 
@@ -47,6 +66,15 @@ router.get('/new', (req, res) => {
   imdb.get(search ,{apiKey: 'thewdb'})
   .then(movie => {
     res.render('addCollection', {movie:movie});
+  })
+  .catch(console.log);
+});
+
+/* Search Movie By ID */
+router.get('/movieId', (req, res) => {
+  imdb.getById('tt0402022', {apiKey: 'thewdb', timeout: 30000})
+  .then(movie => {
+    console.log(movie);
   })
   .catch(console.log);
 });
@@ -89,7 +117,7 @@ router.post('/add_collection', middleWare.isLoggedIn, (req, res) => {
       for (var i = 0; i < user.media.length; i++) {
         for (var x = 0; x < user.media[i].genres.length; x++) {
           const genreArr = user.media[i].genres[x]
-          res.render('home', {movie: user.media, err: '', genres: genreArr, errMsg:'', q: ''});
+          res.render('home', {movie: user.media, err: '', genres: genreArr, errMsg:'', q: '',alpha: alphaArr});
         }
       }
     }

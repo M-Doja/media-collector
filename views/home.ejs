@@ -8,12 +8,27 @@
         <input style="width:100%;text-align:center;"type="text" id="schFld" name="search" required placeholder="Search collection by movie title..." class="form-control">
         <input style="font-weight:bold;"class="btn btn-default btn-block" id="srcBtn"  type="submit" value="Search" >
       </div>
-      <div class="form-group"><br>
-        <b><%= err %><span class="red"><%= errMsg %></span></b><br><br>
-        <a href="/collection"class="btn-text">clear search results</a> |
-        <a  id="" href="https://github.com/M-Doja/media-collector" target="_blank"><i class="glyphicon glyphicon-file"></i> How To Use</a>
-      </div>
+
     </form>
+    <div class="text-center" id="alphaWrap">
+      <% for (var i = 0; i < alpha.length; i++) { %>
+        <form  class="items" action="/search/movie_alpha" method="post">
+          <div class="form-group">
+            <input type="text" name="letter" value="<%= alpha[i] %>">
+          </div>
+            <span>
+              <input  type="submit" value="<%= alpha[i] %>" >
+            </span>
+
+        </form>
+      <%}%>
+    </div>
+    <div class=" text-center form-group"><br>
+      <b><%= err %><span class="red"><%= errMsg %></span></b><br><br>
+      <a href="/collection"class="btn-text">clear search results</a> |
+      <a  id="" href="https://github.com/M-Doja/media-collector" target="_blank"><i class="glyphicon glyphicon-file"></i> How To Use</a>
+    </div>
+
     <hr>
     <div class="row text-center">
   		<div class="col-md-12">

@@ -5,6 +5,11 @@ const express = require('express'),
      middleWare = require('../middleware'),
      passport = require('passport');
 
+const alphaArr = [
+  'A','B','C','D','E','F','G','H','I',
+  'J','K','L','M','N','O','P','Q','R',
+  'S','T','U','V','W','X','Y','Z'
+];
 
 /* GET home page collection. */
 router.get('/', middleWare.isLoggedIn, (req, res, next) => {
@@ -15,19 +20,55 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => {
      if (mediaArr[i].title.toLowerCase()  == regex.toLowerCase()) {
        const arr = [];
        arr.push(mediaArr[i]);
-       return res.render('home',{movie: arr, err: '', errMsg: '', q: ''});
+       console.log(alpha);
+       return res.render('home',{movie: arr, err: '', errMsg: '', q: '' , alpha : alphaArr});
      }
    }
-   res.render('home',{movie: mediaArr, err: 'Sorry no movie by that title found.', errMsg: '', q: ''} )
+   res.render('home',{
+     movie: mediaArr,
+     err: 'Sorry no movie by that title found.',
+     errMsg: '',
+     q: '',
+     alpha: alphaArr
+   });
  }else {
    if (req.user.media < 1) {
      const genreArr = [];
      const movie = [];
-     res.render('home',  {movie: movie, err: '', genres: genreArr, errMsg: '', q: ''});
-   }else {
+
+     for (var i = 0; i < al.length; i++) {
+       console.log(al[i]);
+     }
+     const al = [
+       'A','B','C','D','E','F','G','H','I',
+       'J','K','L','M','N','O','P','Q','R',
+       'S','T','U','V','W','X','Y','Z'
+     ];
+     res.render('home',{
+       movie: movie,
+       err: '',
+       genres: genreArr,
+       errMsg: '',
+       q: '',
+       alpha: al
+     });
+   }
+   else {
      for (var i = 0; i < req.user.media.length; i++) {
        const genreArr = req.user.media[i].genres;
-       res.render('home',  {movie: req.user.media, err: '', genres: genreArr, errMsg: '', q: ''});
+       const al = [
+         'A','B','C','D','E','F','G','H','I',
+         'J','K','L','M','N','O','P','Q','R',
+         'S','T','U','V','W','X','Y','Z'
+       ];
+       res.render('home',  {
+         movie: req.user.media,
+         err: '',
+         genres: genreArr,
+         errMsg: '',
+         q: '',
+         alpha: al
+       });
      }
    }
  }

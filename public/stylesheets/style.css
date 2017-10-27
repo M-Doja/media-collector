@@ -8,6 +8,16 @@ body {
   background-color: #180000;*/
 }
 
+#alphaWrap{
+  margin: auto 20px;
+}
+
+.items {
+  display: inline-block;
+  padding-left: .35%;
+  padding-right: .35%;
+}
+
 .movSrch{
   max-width:500px;
   padding:20px 10px;
