@@ -105,13 +105,13 @@ router.post('/add_collection', middleWare.isLoggedIn, (req, res) => {
       return res.render('error', {message: err.message, error: err});
     }else {
       const userMedia = user.media;
+      /* CHECK FOR DUPLICATES */
       if (userMedia.length > 0) {
-        /* CHECK FOR DUPLICATES */
-        for (var i = 0; i < userMedia.length; i++) {
-          if (userMedia[i].imdburl === req.body.imdburl) {
-            return res.render('search', {movie: user.media, err: 'You already have that movie in your collection.'})
-          }
-        }
+        const dupArr = userMedia
+          .filter(movie => movie.imdburl === req.body.imdburl);
+         if (dupArr.length !== 0) {
+           return res.render('search', { movie: user.media, watchList:req.user.watchList, err: 'You already have that movie in your collection.'})
+         }
       }
       req.body.genres = req.body.genres.split(',');
       req.body.actors = req.body.actors.split(',');
@@ -137,13 +137,13 @@ router.post('/add_watchlist', middleWare.isLoggedIn, (req, res) => {
       return console.log(err);
     }else {
       const userWatch = user.watchList;
-      if (userWatch.length > 0) {
-        /* CHECK FOR DUPLICATES */
-        for (var i = 0; i < userWatch.length; i++) {
-          if (userWatch[i].imdburl === req.body.imdburl) {
-            return res.render('search', {movie: user.media, err: 'You already have that movie on your watch list.'})
-          }
-        }
+      /* CHECK FOR DUPLICATES */
+      if (userMedia.length > 0) {
+        const dupArr = userMedia
+          .filter(movie => movie.imdburl === req.body.imdburl);
+         if (dupArr.length !== 0) {
+           return res.render('search', { movie: user.media, watchList:req.user.watchList, err: 'You already have that movie on your watch list.'})
+         }
       }
       req.body.genres = req.body.genres.split(',');
       req.body.actors = req.body.actors.split(',');

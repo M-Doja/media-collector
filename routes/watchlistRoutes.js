@@ -34,11 +34,11 @@ router.get('/:id', MiddleWare.isLoggedIn, (req, res) => {
          const userMedia = req.user.media;
          /* CHECK FOR DUPLICATES */
          if (userMedia.length > 0) {
-           for (var i = 0; i < userMedia.length; i++) {
-             if (userMedia[i].imdburl === newMovie.imdburl) {
-               return res.render('view_watchList', { watchList:req.user.watchList, err: 'You already have that movie in your collection.'})
-             }
-           }
+           const dupArr = userMedia
+             .filter(movie => movie.imdburl === newMovie.imdburl);
+            if (dupArr.length !== 0) {
+              return res.render('view_watchList', { watchList:req.user.watchList, err: 'You already have that movie in your collection.'})
+            }
          }
          req.user.media.push(newMovie);
          req.user.watchList.remove(newMovie);
