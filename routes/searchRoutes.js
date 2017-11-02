@@ -65,9 +65,8 @@ router.post('/movie_alpha', middleWare.isLoggedIn, (req, res) => {
   res.render('home',{movie:movieArr, err: '', errMsg:'', q: req.body.genre,alpha: alphaArr });
 });
 
-
 /* Search Movie API  (new user)*/
-router.get('/new', (req, res) => {
+router.get('/new', middleWare.isLoggedIn, (req, res) => {
   var search = req.query.search;
   imdb.get(search ,{apiKey: 'thewdb'})
   .then(movie => {
@@ -77,7 +76,7 @@ router.get('/new', (req, res) => {
 });
 
 /* Search Movie By ID */
-router.get('/movieId', (req, res) => {
+router.get('/movieId', middleWare.isLoggedIn, (req, res) => {
   imdb.getById('tt0402022', {apiKey: 'thewdb', timeout: 30000})
   .then(movie => {
     console.log(movie);
@@ -86,7 +85,7 @@ router.get('/movieId', (req, res) => {
 });
 
 /* Search Movie API (existing user)*/
-router.get('/results', (req, res) => {
+router.get('/results', middleWare.isLoggedIn, (req, res) => {
   var search = req.query.search;
   imdb.get(search ,{apiKey: 'thewdb'})
   .then( (movie) => {
@@ -138,8 +137,8 @@ router.post('/add_watchlist', middleWare.isLoggedIn, (req, res) => {
     }else {
       const userWatch = user.watchList;
       /* CHECK FOR DUPLICATES */
-      if (userMedia.length > 0) {
-        const dupArr = userMedia
+      if (userWatch.length > 0) {
+        const dupArr = userWatch
           .filter(movie => movie.imdburl === req.body.imdburl);
          if (dupArr.length !== 0) {
            return res.render('search', { movie: user.media, watchList:req.user.watchList, err: 'You already have that movie on your watch list.'})

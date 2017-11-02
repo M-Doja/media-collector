@@ -56,7 +56,7 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => { // If Searching
 });
 
 /* View Single Movie In Collection */
-router.get('/movie/:id', (req, res, next) => {
+router.get('/movie/:id', middleWare.isLoggedIn,(req, res, next) => {
  User.findOne({'_id': req.user.id}, (err, user) => {
  const usermedia = user.media
    .filter(movie => movie.id === req.params.id);
@@ -97,6 +97,7 @@ router.get('/delete_all/:id', middleWare.isLoggedIn, (req, res) => {
   });
 });
 
+/* Generate Random Movie Pick */
 function random_movie(movies){
  return movies[Math.floor(Math.random()* movies.length)];
 }

@@ -34,8 +34,7 @@ router.get('/addCollection', middleWare.isLoggedIn, (req, res, next) => {
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/collection',
   failureRedirect: '/register'
-}), (req, res) => {
-});
+}), (req, res) => {});
 
 /* Register New User */
 router.post('/register', function(req, res, next) {

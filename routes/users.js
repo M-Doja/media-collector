@@ -5,8 +5,6 @@ const express = require('express'),
      middleWare = require('../middleware'),
      passport = require('passport');
 
-
-
 /* Remove A User Account */
 router.get('/remove_acct/:id', (req, res) => {
   User.findByIdAndRemove(req.user.id, (err, user) => {
