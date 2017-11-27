@@ -2,9 +2,10 @@
   <div class="topSpace"></div>
     <div class="">
       <form class="" action="/search/results" method="get">
-        <div class="">
+        <div class="text-center" style="max-width:600px;margin:auto">
+          <h3 style="color:#fff;">Search For Movies</h3>
           <input id="srchInp"class="form-control"type="text" required name="search" placeholder="Some movie titles are case sensitive"><br>
-          <input id="srchBtn"class="btn btn-default btn-block" value="Search For A Movie" type="submit">
+          <input style="font-weight:bold;"id="srchBtn"class="btn btn-default btn-block" value="Search" type="submit">
         </div>
       <br><br>
       <% if (movie) { %>
@@ -42,54 +43,92 @@
 
                 <button id="addCollectBtn"class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add to collection</button>
                 <div class="board">
-                  <div class="form-group">
+                  <h5 style="color:red;">*** NOTE: If needed edit movie information BEFORE adding to collection  ***</h5>
+                  <div class="form-">
           					<h3><%= movie.title %></h3>
-          					<input type="text" class="form-control" name="title" value="<%= movie.title %>"/>
+                    <a data-toggle="collapse" data-target="#title">edit</a>
+                    <div class="collapse" id="title">
+                      <label for="titles">Edit Title Below</label>
+            					<input type="text" class="form-control" id="titles"name="title" value="<%= movie.title %>"/>
+                    </div><br><br>
           				</div>
 
           				<div class="form-group">
                     <span><%= movie.rating %> out of 10 stars</span><br>
           					<input type="text" class="form-control" name="rating" value="<%= movie.rating %>" />
           				</div>
-                  <!-- Image -->
-                  <div class="form-group">
-                    <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie.poster %>" width=400 /><br>
-          					<input type="text" class="form-control" name="poster" value="<%= movie.poster %>"/>
+
+                  <div class="form-">
+                    <img alt="Bootstrap Image Preview" class="img-responsive" src="<%= movie.poster %>" width=400 />
+                    <a data-toggle="collapse" data-target="#poster">edit</a>
+                    <div class="collapse" id="poster">
+                      <label for="posters">Edit Image URL Below</label>
+            					<input type="text" class="form-control" id="posters"name="poster" value="<%= movie.poster %>"/>
+                    </div><br><br>
           				</div>
 
-                  <div class="form-group">
+                  <div class="form-">
           					<span>Relased: <%= movie.year %></span>
-          					<input type="text" class="form-control" name="year" value="<%= movie.year %>"/>
+                    <a data-toggle="collapse" data-target="#year">edit</a>
+                    <div class="collapse" id="year">
+                      <label for="years">Edit Release Year Below</label>
+            					<input type="text" class="form-control" id="years"name="year" value="<%= movie.year %>"/>
+                    </div><br><br>
           				</div>
 
-                  <div class="form-group">
+                  <div class="form-">
           					<span>Rated: <%= movie.rated %></span>
-          					<input type="text" class="form-control" name="rated" value="<%= movie.rated %>"/>
+                    <a data-toggle="collapse" data-target="#rated">edit</a>
+                    <div class="collapse" id="rated">
+                      <label for="rateds">Edit Rating Below</label>
+            					<input type="text" class="form-control" id="rateds"name="rated" value="<%= movie.rated %>"/>
+                    </div><br><br>
           				</div>
 
-                  <div class="form-group">
+                  <div class="form-">
           					<span>Runtime: <%= movie.runtime %></span>
-          					<input type="text" class="form-control" name="runtime" value="<%= movie.runtime %>"/>
+                    <a data-toggle="collapse" data-target="#runtime">edit</a>
+                    <div class="collapse" id="runtime">
+                      <label for="runtimes">Edit Runtime Below</label>
+            					<input type="text" class="form-control" id="runtimes"name="runtime" value="<%= movie.runtime %>"/>
+                    </div><br><br>
           				</div>
 
-                  <div class="form-group">
+                  <div class="form-">
           					<span>Genres: <%= movie.genres %></span>
-          					<input type="text" class="form-control" name="genres" value="<%= movie.genres %>"/>
+                    <a data-toggle="collapse" data-target="#genres">edit</a>
+                    <div class="collapse" id="genres">
+                      <label for="genre">Edit Genre Below</label>
+            					<input type="text" class="form-control" id="genre"name="genres" value="<%= movie.genres %>"/>
+                    </div><br><br>
           				</div>
 
-                  <div class="form-group">
+                  <div class="form-">
           					<span>Director(s): <%= movie.director %></span>
-          					<input type="text" class="form-control" name="director" value="<%= movie.director %>"/>
+                    <a data-toggle="collapse" data-target="#director">edit</a>
+                    <div class="collapse" id="director">
+                      <label for="directors">Edit Directors Below</label>
+            					<input type="text" class="form-control" id="directors"name="director" value="<%= movie.director %>"/>
+                    </div><br><br>
           				</div>
 
-                  <div class="form-group">
+                  <div class="form-">
           					<span>Actors: <%= movie.actors %></span>
-          					<input type="text" class="form-control" name="actors" value="<%= movie.actors %>"/>
+                    <a data-toggle="collapse" data-target="#actor">edit</a>
+                    <div class="collapse" id="actor">
+                      <label for="actors">Edit Actors Below</label>
+            					<input type="text" class="form-control" id="actors"name="actors" value="<%= movie.actors %>"/>
+                    </div><br><br>
           				</div>
 
-                  <div class="form-group">
+                  <div class="form-">
           					<span><b>Plot:</b> <%= movie.plot %></span>
-                    <textarea name="plot" rows="8" cols="80"><%= movie.plot %></textarea>
+                    <!-- <textarea name="plot" rows="8" cols="80"><%= movie.plot %></textarea> -->
+                    <a data-toggle="collapse" data-target="#plot">edit</a>
+                    <div class="collapse" id="plot">
+                      <label for="plots">Edit Plot Below</label>
+            					<textarea name="plot" id="plots"rows="8" cols="80"><%= movie.plot %></textarea>
+                    </div><br><br>
           				</div>
 
                   <div class="form-group">
@@ -97,9 +136,13 @@
           					<input type="text" class="form-control" name="rating" value="<%= movie.rating %>"/>
           				</div>
 
-                  <div class="form-group">
+                  <div class="form-">
           					<span>Produced by: <%= movie.production %></span>
-          					<input type="text" class="form-control" name="production" value="<%= movie.production %>"/>
+                    <a data-toggle="collapse" data-target="#production">edit</a>
+                    <div class="collapse" id="production">
+                      <label for="productions">Edit Production Company Below</label>
+            					<input type="text" class="form-control" id="productions"name="production" value="<%= movie.production %>"/>
+                    </div><br><br>
           				</div>
 
                   <div class="form-group">
