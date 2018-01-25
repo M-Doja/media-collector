@@ -15,9 +15,8 @@ const express = require('express'),
       searchRoutes = require('./routes/searchRoutes'),
       watchRoutes = require('./routes/watchlistRoutes'),
       collectionRoutes = require('./routes/collectionRoutes'),
-      users = require('./routes/users');
-
-const app = express();
+      users = require('./routes/users'),
+      app = express();
 
 require('./services/passport');
 
@@ -56,8 +55,6 @@ app.use(require('express-session')({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -82,13 +79,11 @@ app.use((req, res, next) => {
   next(err);
 });
 
-
 // error handler
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.render('error');

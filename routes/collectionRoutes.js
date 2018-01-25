@@ -10,21 +10,20 @@ const alphaArr = [
        'S','T','U','V','W','X','Y','Z','#'
      ];
 
-/* GET home page collection. */
-router.get('/', middleWare.isLoggedIn, (req, res, next) => { // If Searching
+// GET home
+router.get('/', middleWare.isLoggedIn, (req, res, next) => {
  if(req.query.search) {
-   const regex = req.query.search;
+   const searchValue = req.query.search;
    const media = req.user.media
-    .filter(movie => movie.title.toLowerCase()  == regex.toLowerCase());
-
+    .filter( movie => movie.title.toLowerCase() == searchValue.toLowerCase() );
+    console.log(media);
     if (media.length > 0) {
       return res.render('home',{movie: media, err: '', errMsg: '', q: '' , alpha : alphaArr});
     }else {
       return res.render('home',{
         movie: media,
         err: 'Sorry no movie by that title found.',
-        errMsg: '',
-        q: '',
+        errMsg: '', q: '',
         alpha: alphaArr
       });
     }
@@ -34,21 +33,19 @@ router.get('/', middleWare.isLoggedIn, (req, res, next) => { // If Searching
      const movie = [];
      return res.render('home',{
        movie: movie,
-       err: '',
-       genres: genreArr,
-       errMsg: '',
-       q: '',
+       err: '', genres: genreArr,
+       errMsg: '', q: '',
        alpha: alphaArr
      });
    }else { // Existing User
-     const genreArr = req.user.media
+     var genreArr = req.user.media
       .filter(movie => movie.genres);
+      console.log(req.user.media.sort());
+      req.user.media.sort();
      return res.render('home',  {
        movie: req.user.media,
-       err: '',
-       genres: genreArr,
-       errMsg: '',
-       q: '',
+       err: '', genres: genreArr,
+       errMsg: '', q: '',
        alpha: alphaArr
      });
    }

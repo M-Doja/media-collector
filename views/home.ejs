@@ -37,7 +37,9 @@
         </p>
         <br><br>
         <section class="flex-container wrap">
-          <% for(var i = movie.length; i-- > 0;){ %>
+          
+          <% for(var i = movie.length; i-- > 0;){  %>
+
             <p style="margin:30px auto; padding-left:4.5%; padding-right:4.5%;">
               <a href="/collection/movie/<%= movie[i].id %>">
                 <button class="btn btn-danger text-center"  name="<%= movie[i].title %>">
